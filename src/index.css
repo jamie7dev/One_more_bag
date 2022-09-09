@@ -1,3 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap');
+* {
+  font-family: 'Do Hyeon', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "GillSansMTPro-Book";
+  font-family: "GillSansMTPro-Light";
+  font-family: "GillSansMTPro-Medium";
+}
+
+@font-face {
+  font-family: "GillSansMTPro-Book";
+  src: url("./assets/fonts/GillSansMTPro-Book.otf");
+}
+@font-face {
+  font-family: "GillSansMTPro-Light";
+  src: url("./assets/fonts/GillSansMTPro-Light.otf");
+}
+@font-face {
+  font-family: "GillSansMTPro-Medium";
+  src: url("./assets/fonts/GillSansMTPro-Medium.otf");
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
