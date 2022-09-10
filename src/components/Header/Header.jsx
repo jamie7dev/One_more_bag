@@ -24,7 +24,6 @@ const Header = () => {
               <p>BAG/0</p>
             </StUserBtn>
             <EngBtn>EN</EngBtn>
-
         </StHdCategory>        
       </StHeader>
     </>
@@ -34,11 +33,12 @@ const Header = () => {
 export default Header;
 
 const StHeader = styled.div`
+  /* background-color: green; */
   text-align: center;
   position: relative;
   max-width: 1480px;
   min-width: 1180px;
-  padding: 0 20px;
+  padding: 0 2%;
   margin: 0 auto;
   width: 100%;
   top: 18px;
@@ -53,9 +53,44 @@ const StHdCategory = styled.div`
   a, button {
       text-decoration: none;
       color: black;
-      margin: 10px;
+      margin: 0px;
       font-size: 20px;
     }
+`
+
+const StLogo = styled.p`
+  padding: 5px 2% 5px 0;
+  font-size: 28px;
+  line-height: 38px;
+  letter-spacing: 2.5px;
+  cursor: pointer;
+`
+const StHdBtn = styled.p`
+  padding: 5px 0;
+  font-size: 28px;
+  line-height: 38px;
+  letter-spacing: 2.5px;
+  cursor: pointer;
+`
+const Label = styled.div`
+  height: 34px;
+  border-bottom: 1.5px solid black;
+  margin-top: 20px;
+`
+
+const StUserBtn = styled.div`
+
+  display: flex;
+  font-size: 15px;
+  margin-top: 16px;
+  margin-right: 1%;
+  cursor: pointer;
+  p {
+    height: 30px;
+    /* background-color: red; */
+    padding: 0 10%;
+    letter-spacing: 1px;
+  }
 `
 const EngBtn = styled.p`
   border: 1.5px solid black;
@@ -67,35 +102,4 @@ const EngBtn = styled.p`
   text-align: center;
   line-height: 40px;
   cursor: pointer;
-`
-
-const StLogo = styled.p`
-  padding: 5px 15px;
-  font-size: 28px;
-  line-height: 38px;
-  letter-spacing: 2.5px;
-  cursor: pointer;
-`
-const StHdBtn = styled.p`
-  padding: 5px 15px;
-  font-size: 28px;
-  line-height: 38px;
-  letter-spacing: 2.5px;
-  cursor: pointer;
-`
-const Label = styled.div`
-  height: 44px;
-  border-bottom: 1.5px solid black;
-  margin-top: 16px;
-`
-
-const StUserBtn = styled.div`
-  display: flex;
-  font-size: 14px;
-  margin-left: 3%;
-  margin-top: 16px;
-  cursor: pointer;
-  p {
-    padding: 0 12%;
-  }
 `
