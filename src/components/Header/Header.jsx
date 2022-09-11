@@ -2,8 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { NodeMinus, Search } from 'react-bootstrap-icons';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+
+  const navigate = useNavigate();
+
   return (
     <>
       <StHeader>
@@ -19,8 +23,10 @@ const Header = () => {
               </label>
             </Label>
             <StUserBtn>
-              <p>LOGIN</p>
-              <p>JOIN</p>
+              {/* 로그인 하면 마이페이지 보여주고 로그아웃 상태면 로그인 보여주기 */}
+              <p onClick={()=>navigate('/login')}>LOGIN</p>
+              {/* <p onClick={()=>navigate('/mypage')}>MYPAGE</p> */}
+              <p onClick={()=>navigate('/signup')}>JOIN</p>
               <p>BAG/0</p>
             </StUserBtn>
             <EngBtn>EN</EngBtn>

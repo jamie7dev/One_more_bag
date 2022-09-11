@@ -1,10 +1,14 @@
 import React from "react";
+import Header from '../components/Header/Header'; 
+import MypageComponent from '../components/Mypage/MypageComponent';
 
 const MyPage = () => {
   return (
-
-    <div>마이 페이지</div>
-
+    <>
+      <Header/>
+      <MypageComponent/>
+    </>
   );
 };
+
 export default MyPage;

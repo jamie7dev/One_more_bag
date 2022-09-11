@@ -1,10 +1,14 @@
 import React from "react";
+import Header from '../components/Header/Header'; 
+import Signup from '../components/Signup/Singup';
 
 const SignupPage = () => {
+
   return (
-
-    <div>회원가입 페이지</div>
-
+    <>
+      <Header />
+      <Signup/>
+    </>
   );
 };
 export default SignupPage;
