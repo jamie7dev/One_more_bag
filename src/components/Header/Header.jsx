@@ -43,7 +43,7 @@ const StHeader = styled.div`
   text-align: center;
   position: relative;
   max-width: 1480px;
-  min-width: 1180px;
+  min-width: 1140px;
   padding: 0 2%;
   margin: 0 auto;
   width: 100%;
