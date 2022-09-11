@@ -1,13 +1,38 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Signup = () => {
-    const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    return (
-        <Container>
-            <Item1>
+  const initialState = {
+    email:'',
+    name:'',
+    password:'',
+    confirmpassword:'',
+    address:'',
+    phone:'',
+  }
+  const [signup, setSignup] = useState(initialState);
+
+  const onChangeHandler = (e) => {
+    const {name, value} = e.target;
+    setSignup({...signup, [name]: value,});
+  };
+
+  const onSaveBtnHandler = ()=> {
+    // dispatch(__updateUserInfo(newInfo));
+    // alert('회원정보 수정 완료') 이 부분은 모듈에서...
+    console.log(signup);
+    navigate('/')
+    setSignup(initialState);
+  }; 
+
+  return (
+      <Container>
+          <Item1>
             <div>SIGN UP</div>
             <ul>
                 <li onClick={()=>{navigate('/login')}}>로그인</li>
@@ -17,21 +42,31 @@ const Signup = () => {
                 <li>아이디 찾기</li>
                 <li>비밀번호 찾기</li>
             </ul>
-            </Item1>
+          </Item1>
 
-            <Item2>
+          <Item2>
             <div>아이디 (이메일 형식) <span style={{color:'#FF6200'}}>*필수</span></div>
-            <input placeholder='ex) onemorebag@naver.com'/>
+            <input 
+            required
+            type='email'
+            placeholder='onemorebag@naver.com'
+            name='email'
+            value={signup.email}
+            onChange={onChangeHandler}
+            />
+
             <div>비밀번호 <span style={{color:'#FF6200'}}>*필수</span></div>
             <input 
-            id="passwd" 
-            name="passwd" 
-            fw-filter="isFill&amp;isMin[4]&amp;isMax[16]" 
-            fw-label="비밀번호" 
-            fw-msg="" 
-            autocomplete="off" 
-            maxlength="16" 
-            type="password"/>
+            type="password"
+            id="password" 
+            name="password" 
+            value={signup.password}
+            onChange={onChangeHandler}
+            // fw-filter="isFill&amp;isMin[4]&amp;isMax[16]" 
+            minLength={10} 
+            maxLength={16} 
+            />
+
             <TypeUpper>
                 <div>
                 <strong>※ 비밀번호 입력 조건</strong>
@@ -47,21 +82,45 @@ const Signup = () => {
                 </div>
                 <a>x</a>
             </TypeUpper>
+
             <div>비밀번호 확인 <span style={{color:'#FF6200'}}>*필수</span></div>
             <input 
-            id="passwd" 
-            name="passwd" 
-            fw-filter="isFill&amp;isMin[4]&amp;isMax[16]" 
-            fw-label="비밀번호" 
-            fw-msg="" 
-            autocomplete="off" 
-            maxlength="16" 
-            type="password"/>
+            required
+            type="password"
+            id="confirmpassword" 
+            name="confirmpassword" 
+            value={signup.confirmpassword}
+            onChange={onChangeHandler} 
+            minLength={10} 
+            maxLength={16} 
+            />
+
+            <div>이름 <span style={{color:'#FF6200'}}>*필수</span></div>
+            <input
+            required
+            name='name'
+            value={signup.name}
+            onChange={onChangeHandler}
+            />
+
             <div>주소 <span style={{color:'#FF6200'}}>*필수</span></div>
-            <input />
+            <input 
+            required
+            name='address'
+            value={signup.address}
+            onChange={onChangeHandler}
+            />
+
             <div>휴대전화 <span style={{color:'#FF6200'}}>*필수</span></div>
-            <input />
-            <div style={{ color: 'transparent' }}>empty</div>
+            <input 
+            required
+            name='phone'
+            value={signup.phone}
+            onChange={onChangeHandler}
+            />
+
+            <p></p>
+
             <Btns>
                 <button
                 style={{ backgroundColor: 'white', border: '1px solid black' }}
@@ -70,13 +129,14 @@ const Signup = () => {
                 취소
                 </button>
                 <button style={{ color: 'white', backgroundColor: 'black' }}
-                onClick={()=> {navigate('/')}}>
+                onClick={onSaveBtnHandler}
+                >
                 가입하기
                 </button>
             </Btns>
-            </Item2>
-        </Container>
-    );
+          </Item2>
+      </Container>
+  );
 }
 
 export default Signup;
@@ -85,7 +145,7 @@ const Container = styled.div`
   display: grid;
   margin: 0 auto;
   grid-template-columns: repeat(5, 1fr);
-  grid-auto-rows: minmax(1530px, auto);
+  grid-auto-rows: minmax(auto);
   grid-column-gap: 10px;
   width: 1480px;
   padding: 50px 20px 100px 20px;
@@ -143,7 +203,7 @@ const Item2 = styled.div`
     margin-bottom: 10px;
     background-color: #eee;
     font-size: 16px;
-    padding-left: 10px;
+    padding: 0 10px;
     :focus {
       outline: 1px solid;
     }
