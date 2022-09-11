@@ -1,9 +1,13 @@
 import React from "react";
+import Header from "../components/Header/Header";
+import Detail from '../components/Detail/Detail';
 
 const DetailPage = () => {
   return (
-
-    <div>상품 상세 페이지</div>
+    <>
+      <Header />
+      <Detail />
+    </>   
 
   );
 };
