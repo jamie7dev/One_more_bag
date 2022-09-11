@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 const List = () => {
   const navigate = useNavigate();
+  
 
   return (
     <Stbody>
@@ -39,6 +40,7 @@ const List = () => {
             <p className="total">낮은가격</p>
             <p className="total">높은가격</p>
             <p className="total">조회수</p>
+
           </Stfilter>
           </StFunction>        
         <StList>
