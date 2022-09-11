@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const List = () => {
+  const navigate = useNavigate();
   
 
   return (
@@ -38,8 +39,8 @@ const List = () => {
             <p className="total">상품명</p>
             <p className="total">낮은가격</p>
             <p className="total">높은가격</p>
-            <p className="total">제조사</p>
-            <p className="total">사용후기</p>
+            <p className="total">조회수</p>
+
           </Stfilter>
           </StFunction>        
         <StList>

@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { NodeMinus, Search } from 'react-bootstrap-icons';
+import { Search } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
@@ -12,8 +11,8 @@ const Header = () => {
     <>
       <StHeader>
         <StHdCategory>
-            <StLogo>onemorebag</StLogo>
-            <StHdBtn>SHOP</StHdBtn>
+            <StLogo onClick={()=>navigate('/')}>onemorebag</StLogo>
+            <StHdBtn onClick={()=>navigate('/')}>SHOP</StHdBtn>
             <StHdBtn>PLOT</StHdBtn>
             <StHdBtn>ABOUT</StHdBtn>
             <Label>
@@ -27,7 +26,7 @@ const Header = () => {
               <p onClick={()=>navigate('/login')}>LOGIN</p>
               {/* <p onClick={()=>navigate('/mypage')}>MYPAGE</p> */}
               <p onClick={()=>navigate('/signup')}>JOIN</p>
-              <p>BAG/0</p>
+              <p onClick={()=>navigate('/cart')}>BAG/0</p>
             </StUserBtn>
             <EngBtn>EN</EngBtn>
         </StHdCategory>        
@@ -41,7 +40,7 @@ export default Header;
 const StHeader = styled.div`
   /* background-color: green; */
   text-align: center;
-  position: relative;
+  position: sticky;
   max-width: 1480px;
   min-width: 1140px;
   padding: 0 2%;
@@ -65,6 +64,8 @@ const StHdCategory = styled.div`
 `
 
 const StLogo = styled.p`
+  background-color: white;
+  border-radius: 50px;
   padding: 5px 2% 5px 0;
   font-size: 28px;
   line-height: 38px;
@@ -72,6 +73,8 @@ const StLogo = styled.p`
   cursor: pointer;
 `
 const StHdBtn = styled.p`
+  background-color: white;
+  border-radius: 50px;
   padding: 5px 0;
   font-size: 28px;
   line-height: 38px;
@@ -79,6 +82,7 @@ const StHdBtn = styled.p`
   cursor: pointer;
 `
 const Label = styled.div`
+  background-color: white;
   height: 34px;
   border-bottom: 1.5px solid black;
   margin-top: 20px;

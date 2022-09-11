@@ -1,9 +1,13 @@
 import React from "react";
+import Cart from '../components/Cart/Cart'; 
+import Header from '../components/Header/Header';
 
 const CartPage = () => {
   return (
-
-    <div>장바구니 페이지</div>
+    <>
+      <Header />
+      <Cart />
+    </>   
 
   );
 };
