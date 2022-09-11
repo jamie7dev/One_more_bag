@@ -12,7 +12,7 @@ const Header = () => {
       <StHeader>
         <StHdCategory>
             <StLogo onClick={()=>navigate('/')}>onemorebag</StLogo>
-            <StHdBtn>SHOP</StHdBtn>
+            <StHdBtn onClick={()=>navigate('/')}>SHOP</StHdBtn>
             <StHdBtn>PLOT</StHdBtn>
             <StHdBtn>ABOUT</StHdBtn>
             <Label>
