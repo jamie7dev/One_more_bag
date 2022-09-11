@@ -1,0 +1,34 @@
+.innercontainer {
+  display: grid;
+  padding: 10px;
+  margin: 0 auto;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: minmax(205px, auto);
+  grid-gap: 10px;
+  /* background-color: aqua; */
+  width: 1140px;
+  grid-template-areas: 
+  'a b'
+  'c c'
+  /* grid-templata-areas는 이미지 지정할 때 유용하게 사용 */
+}
+
+.inneritem1 {
+  /* background-color: yellow;  */
+  grid-area: a;
+  display: flex;
+  align-items: center;
+}
+
+.inneritem2 {
+  /* background-color: blueviolet; */
+  grid-area: b;
+  display: flex;
+  align-items: center;
+}
+
+.inneritem3 {
+  /* background-color: deeppink; */
+  grid-area: c;
+}
+
