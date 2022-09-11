@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const List = () => {
-  
+  const navigate = useNavigate();
 
   return (
     <Stbody>
