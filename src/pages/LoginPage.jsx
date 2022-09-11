@@ -1,10 +1,13 @@
-import React from "react";
+import React from 'react';
+import Header from '../components/Header/Header';
+import Login from '../components/Login/Login';
 
 const LoginPage = () => {
   return (
-
-    <div>로그인 페이지</div>
-
+    <>
+      <Header />
+      <Login />
+    </>
   );
 };
 export default LoginPage;
