@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Cart = () => {
+  const [count, setCount] = useState(0);
+
   const item = {
     data: [
       {id:"", imgUrl:"", title:"", desc:"", cost:""},
-      {id:"1", imgUrl:"이미지", title:"[인더비기닝]", desc:"fogni round pouch", cost:"18,000원"}
+      {id:"1", imgUrl:"이미지", title:"[인더비기닝]", desc:"fogni round pouch", cost:"18000"}
     ]
   }
+  let [arr, setArr] = useState(new Array(item.data.length).fill(0));
+  
 
   return (
       <Container>
@@ -15,7 +19,7 @@ const Cart = () => {
           <div>BAG</div>
         </Item1>
         <Item2>
-        <table class="table table-borderless">
+        <table className="table table-borderless">
           <thead style={{textAlign:"center"}}>
             <tr>
               <th scope="col" ><input type="checkbox" id="checkall" /></th>
@@ -29,16 +33,18 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
-            {item.data.map((item)=>{
+            {item.data.map((item, i)=>{
               return (
-                <tr style={{textAlign:"center"}}>
+                <tr style={{textAlign:"center"}} key={item.id}>
                   <th scope="row"><input type="checkbox" id={item.id} /></th>
                   <td style={{width:"80px", height:"80px"}}>{item.imgUrl}</td>
                   <td style={{width:"300px", height:"80px"}}>{item.title}{item.desc}</td>
-                  <td style={{width:"100px", height:"80px"}}>수량</td>
-                  <td style={{width:"100px", height:"80px"}}>{item.cost}</td>
+                  <td style={{width:"100px", height:"80px"}}><input type="number" value={arr[i]} min="0" 
+                  onChange={(e)=>{let copy = [...arr]; copy[i]=e.target.value; setArr(copy)}} 
+                  style={{width:"44px", height:"26px"}}/></td>
+                  <td style={{width:"100px", height:"80px"}}>{item.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</td>
                   <td style={{width:"100px", height:"80px"}}>무료</td>
-                  <td style={{width:"100px", height:"80px"}}>{item.cost}*수량</td>
+                  <td style={{width:"100px", height:"80px"}}>{(Number(item.cost)*Number(arr[i])).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</td>
                   <td style={{width:"100px", height:"80px"}}>
                   <button style={{backgroundColor:"black", color:"white", border:"1.5px solid black"}}>주문하기</button>
                   <br />
@@ -47,7 +53,6 @@ const Cart = () => {
                 </tr>
               );
             })}
-            
           </tbody>
         </table>
         </Item2>
