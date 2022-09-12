@@ -43,7 +43,7 @@ const StHeader = styled.div`
   position: sticky;
   max-width: 1480px;
   min-width: 1140px;
-  padding: 0 2%;
+  padding: 10px 2%;
   margin: 0 auto;
   width: 100%;
   top: 18px;
@@ -85,7 +85,6 @@ const Label = styled.div`
   background-color: white;
   height: 34px;
   border-bottom: 1.5px solid black;
-  margin-top: 20px;
 `
 
 const StUserBtn = styled.div`
