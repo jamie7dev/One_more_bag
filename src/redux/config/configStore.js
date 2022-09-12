@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import user from '../modules/user';
+import members from '../modules/members';
 
 
 const store = configureStore({
-
   reducer: {
-    user: user
-  }
-
+    members,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
 });
 
 export default store;
