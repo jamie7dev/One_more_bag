@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { __memberLogin } from '../../redux/modules/members'; 
+
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -13,11 +15,12 @@ const Login = () => {
   const [login, setLogin] = useState(initialState);
 
   const onLoginBtnHandler = () => {
-    // dispatch(__login(login));
-  console.log(login);
+  if (login.email.trim() === "" || login.password.trim() === "")
+  {return alert("이메일과 비밀번호를 입력하세요.")};
+  dispatch(__memberLogin(login));
   navigate('/')
   setLogin(initialState);
-  }
+  };
 
   return (
     <>
@@ -35,7 +38,7 @@ const Login = () => {
           </ul>
         </Item1>
         <Item2>
-          <div>아이디(이메일형식)</div>
+          <div>아이디 (이메일 형식)</div>
           <input 
           required
           placeholder='onemorebag@naver.com'
@@ -65,7 +68,8 @@ const Login = () => {
           style={{ backgroundColor: '#F5E006' }}
           // onClick={}
           >카카오 로그인</button>
-          <h3>아직 회원이 아니신가요?</h3>
+          <p></p>
+          <h5>아직 회원이 아니신가요?</h5>
           <button
             style={{ backgroundColor: 'white', border: '1px solid black' }}
             onClick={()=> {navigate('/signup')}}
@@ -125,13 +129,12 @@ const Item2 = styled.div`
   margin: 0 auto;
   padding: 75px;
   font-size: 14px;
-  div, h3, input, button{
+  div, h3, h4, h5, input, button{
     font-family: 'Gill Sans', 'Gill Sans MT', 'Lato', 'Noto Sans KR', Helvetica,
     Arial, sans-serif;
     width: 400px;
   }
   input {
-    width: 400px;
     height: 45px;
     border: none;
     margin-bottom: 10px;
@@ -140,7 +143,6 @@ const Item2 = styled.div`
     padding: 0 10px;
   }
   button {
-    width: 420px;
     height: 50px;
     border: none;
     margin-bottom: 10px;
