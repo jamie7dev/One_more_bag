@@ -102,6 +102,7 @@ const StUserBtn = styled.div`
   }
 `
 const EngBtn = styled.p`
+  background-color: white;
   border: 1.5px solid black;
   width: 36px;
   height: 36px;
@@ -110,5 +111,6 @@ const EngBtn = styled.p`
   font-weight: bold;
   text-align: center;
   line-height: 40px;
+  margin-left: 1%;
   cursor: pointer;
 `
