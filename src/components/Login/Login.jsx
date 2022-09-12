@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { __memberLogin } from '../../redux/modules/members'; 
+
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -13,11 +15,12 @@ const Login = () => {
   const [login, setLogin] = useState(initialState);
 
   const onLoginBtnHandler = () => {
-    // dispatch(__login(login));
-  console.log(login);
+  if (login.email.trim() === "" || login.password.trim() === "")
+  {return alert("이메일과 비밀번호를 입력하세요.")};
+  dispatch(__memberLogin(login));
   navigate('/')
   setLogin(initialState);
-  }
+  };
 
   return (
     <>

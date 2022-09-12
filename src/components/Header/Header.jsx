@@ -2,10 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { Search } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
+import { deleteCookie, getCookie } from "../../shared/cookie";
 
 const Header = () => {
 
   const navigate = useNavigate();
+
+  const logIn = getCookie("ACCESS_TOKEN");
+  console.log(logIn);
 
   return (
     <>
@@ -23,7 +27,19 @@ const Header = () => {
             </Label>
             <StUserBtn>
               {/* 로그인 하면 마이페이지 보여주고 로그아웃 상태면 로그인 보여주기 */}
-              <p onClick={()=>navigate('/login')}>LOGIN</p>
+              {
+                logIn === undefined ?
+                (<p onClick={()=>navigate('/login')}>LOGIN</p>)
+                :
+                (<p onClick={()=>{
+                  alert('로그아웃 되었습니다.')
+                  navigate("/");
+                  deleteCookie("ACCESS_TOKEN");
+                  deleteCookie("REFRESH_TOKEN");
+                  deleteCookie("isLogin");
+                  window.localStorage.removeItem("name");
+                }}>LOGOUT</p>)
+              }
               {/* <p onClick={()=>navigate('/mypage')}>MYPAGE</p> */}
               <p onClick={()=>navigate('/signup')}>JOIN</p>
               <p onClick={()=>navigate('/cart')}>BAG/0</p>
