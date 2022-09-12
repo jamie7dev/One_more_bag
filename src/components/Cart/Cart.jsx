@@ -23,13 +23,13 @@ const Cart = () => {
           <thead style={{textAlign:"center"}}>
             <tr>
               <th scope="col" ><input type="checkbox" id="checkall" /></th>
-              <th scope="col" style={{width:"80px"}}>이미지</th>
-              <th scope="col" style={{width:"300px"}}>상품정보</th>
-              <th scope="col" style={{width:"100px"}}>수량</th>
-              <th scope="col" style={{width:"100px"}}>판매가</th>
-              <th scope="col" style={{width:"100px"}}>배송비</th>
-              <th scope="col" style={{width:"100px"}}>합계</th>
-              <th scope="col" style={{width:"100px"}}>선택</th>
+              <th scope="col" style={{width:"80px", fontWeight:"normal"}}>이미지</th>
+              <th scope="col" style={{width:"300px", fontWeight:"normal"}}>상품정보</th>
+              <th scope="col" style={{width:"100px", fontWeight:"normal"}}>수량</th>
+              <th scope="col" style={{width:"100px", fontWeight:"normal"}}>판매가</th>
+              <th scope="col" style={{width:"100px", fontWeight:"normal"}}>배송비</th>
+              <th scope="col" style={{width:"100px", fontWeight:"normal"}}>합계</th>
+              <th scope="col" style={{width:"100px", fontWeight:"normal"}}>선택</th>
             </tr>
           </thead>
           <tbody>
@@ -56,6 +56,12 @@ const Cart = () => {
           </tbody>
         </table>
         </Item2>
+        <Rmv1>
+          <button>삭제하기</button>
+        </Rmv1>
+        <Rmv2>
+          <button>장바구니 비우기</button>
+        </Rmv2>
       </Container>
   );
 };
@@ -116,3 +122,31 @@ const Item2 = styled.div`
   }
 `;
 
+const Rmv1 = styled.div`
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+  button{
+    width: 150px;
+    min-height: 50px;
+    height: 50px;
+    background: transparent;
+    border: 1.5px solid #000;
+    line-height: 50px;
+  }
+`
+
+const Rmv2 = styled.div`
+  grid-column: 5 / 6;
+  grid-row: 3 / 4;
+  position: relative;
+  button {  
+    width: 150px;
+    min-height: 50px;
+    height: 50px;
+    background: transparent;
+    border: 1.5px solid #000;
+    position: absolute;
+    right: 60px;
+    line-height: 50px;
+  }
+`
