@@ -26,7 +26,7 @@ export const __memberLogin = createAsyncThunk(
       setCookie("ACCESS_TOKEN", data.headers.authorization);
       setCookie("REFRESH_TOKEN", data.headers.refreshtoken); //체크
       localStorage.setItem("name", data.data.data.name);
-
+ 
       alert('로그인 되었습니다.');
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {

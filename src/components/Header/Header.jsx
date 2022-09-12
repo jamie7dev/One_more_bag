@@ -9,7 +9,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const logIn = getCookie("ACCESS_TOKEN");
-  console.log(logIn);
+  // console.log(logIn);
 
   return (
     <>
@@ -40,9 +40,15 @@ const Header = () => {
                   window.localStorage.removeItem("name");
                 }}>LOGOUT</p>)
               }
-              {/* <p onClick={()=>navigate('/mypage')}>MYPAGE</p> */}
-              <p onClick={()=>navigate('/signup')}>JOIN</p>
-              <p onClick={()=>navigate('/cart')}>BAG/0</p>
+              { 
+                logIn === undefined ? 
+                (<p onClick={()=>navigate('/signup')}>JOIN</p>) 
+                : 
+                (<p onClick={()=>navigate('/mypage')}>MY PAGE</p>)
+              }
+              {
+                logIn === undefined ? (null) : (<p onClick={()=>navigate('/cart')}>BAG/0</p>)
+              }
             </StUserBtn>
             <EngBtn>EN</EngBtn>
         </StHdCategory>        

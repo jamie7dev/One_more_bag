@@ -18,7 +18,7 @@ const Signup = () => {
     email:'',
     name:'',
     password:'',
-    confirmpassword:'',
+    passwordConfirm:'',
     address:'',
     phone:'',
   }
@@ -114,16 +114,16 @@ const Signup = () => {
             <input 
             required
             type="password"
-            id="confirmpassword" 
-            name="confirmpassword" 
-            value={member.confirmpassword}
+            id="passwordConfirm" 
+            name="passwordConfirm" 
+            value={member.passwordConfirm}
             onChange={onChangeHandler} 
             minLength={4} 
             maxLength={12} 
             />
             {
-              member.confirmpassword && 
-              (member.password !== member.confirmpassword ? 
+              member.passwordConfirm && 
+              (member.password !== member.passwordConfirm ? 
               <div style={{color:"red", fontSize:"14px"}}>비밀번호가 일치하지 않습니다</div> 
               : 
               <div style={{color:"green", fontSize:"14px"}}>비밀번호가 일치합니다</div>
