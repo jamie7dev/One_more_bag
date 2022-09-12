@@ -66,7 +66,7 @@ const Detail = () => {
           </RightTop>
           <TotalPrice>
               <p style={{fontSize:"14px", paddingTop:"10px"}}>총 상품금액 :</p>
-              <p style={{fontSize:"20px"}}>18,000원</p>              
+              <p style={{fontSize:"20px", paddingTop:"5px"}}>18,000원</p>              
           </TotalPrice>
           <Bottom>
             
@@ -106,49 +106,48 @@ const RightTop = styled.div`
 `
 const Brand = styled.div`
   display: flex;
-  width: 470px;
-  height: 40px;
+  width: 440px;
+  height: 44px;
   border: 1.5px solid #D4D4D4;
   justify-content: space-between;
   align-items: center;
   padding: 0 12px;
+  h3{
+    padding-top: 14px;
+    font-size: 19px;
+    font-weight: bold;
+  }
   div {
+    /* background-color: green; */
     display: flex;
-    width: 64.031px;
-    height: 15px;
-    padding: 7px 20px 20px 20px;
+    width: 80px;
+    height: 44px;
+    padding: 3%;
     border-left: 1.5px solid #D4D4D4;
     p {
       line-height: 0px;
-      padding-left: 10px;
+      padding: 12px 5px 0 5px;
       font-size: 15px;
       font-family: "GillSansMTPro-Medium";
       font-weight: bold;
       letter-spacing: 0.8px;
-    }
-    img {
-      padding-top: 4px;
     }
   }
 `
 const ItemTitle = styled.p`
   color: #5D5D5D;
   font-size: 16px;
-  padding: 20px 0 10px 0;
+  padding: 30px 0;
   letter-spacing: 0.5px;
 `
 const ItemPrice = styled.div`
   display: flex;
   height: 38px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #D4D4D4;
+  border-bottom: 1.5px solid #D4D4D4;
   justify-content: space-between;
   p {
     font-size: 24px;
-    line-height: 0px;
-  }
-  img {
-    padding-top: 12px;
+    line-height: 24px;
   }
 `
 
@@ -164,19 +163,20 @@ const DtDesc = styled.div`
     font-weight: lighter;
     color: #555555;
     
+    padding-top: 15px;
   }
   p {
     width: 30%;
     position: absolute;
-    right: 10px;
+    left: 120px;
     font-size: 13px;
-    padding-right: 200px;
     line-height: 34px;
+    padding-top: 5px;
   }
   select {
     width: 400px;
     height: 38px;
-    padding-top: 5px;
+    padding: 5px 0 0 5px;
     border: 1.5px solid #D4D4D4;
   }
 `
@@ -192,7 +192,7 @@ const DtDesc = styled.div`
 
 const TotalPrice = styled.div`
   display: flex;
-  padding: 10px 0 0 350px;
+  padding: 10px 0 0 280px;
 `
 const Bottom = styled.dt`
   position: relative;
