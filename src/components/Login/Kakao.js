@@ -1,22 +1,20 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { actionCreators as userActions} from "../../redux/modules/user";
-import { useNavigate } from "react-router-dom";
+import { actionCreators as userActions} from "../../redux/modules/members";
+// import { useNavigate } from "react-router-dom";
 
-const Kakao = (props) => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+const KaKao = (props) => {
+  const dispatch = useDispatch();
 
-    let code = new URL(window.location.href).searchParams.get("code");
-    // console.log(code);
+  // 인가코드
+  let code = new URL(window.location.href).searchParams.get("code");
 
-    React.useEffect(async () => {
-      await dispatch(userActions.kakaoLogin(code))
-      navigate('/')}, []);
-    
+  React.useEffect( () => {
+    console.log(code)
+     dispatch(userActions.kakaologin(code));
+  }, []);
 
-    return null;
+  return null;
+};
 
-}
-
-export default Kakao;
+export default KaKao;

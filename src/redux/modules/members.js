@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { instance } from "../../shared/api";
 import { setCookie } from "../../shared/cookie";
-// import axios from 'axios'
+import axios from 'axios'
 
 export const _getMembersEmail = createAsyncThunk(
   'members/_getMembersEmail',
@@ -26,7 +26,7 @@ export const __memberLogin = createAsyncThunk(
       setCookie("ACCESS_TOKEN", data.headers.authorization);
       setCookie("REFRESH_TOKEN", data.headers.refreshtoken); //체크
       localStorage.setItem("name", data.data.data.name);
-
+      console.log(data);
       alert('로그인 되었습니다.');
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
@@ -34,6 +34,45 @@ export const __memberLogin = createAsyncThunk(
     }
   }
 );
+export const kakaologin = createAsyncThunk(
+  'members/kakaoLogin',
+  async (code, thunkAPI) => {
+      try {
+          const res = await instance.get(`api/member/kakao?code=${code}`)
+          
+          localStorage.setItem("ACCESSTOKEN", res.headers.authorization);
+          console.log(res);
+          return thunkAPI.fulfillWithValue(res.data);          
+                    
+        } catch (error) {
+          console.log("카카오 로그인 실패")
+          return thunkAPI.rejectWithValue(error);
+      }
+  }
+);
+
+// export const kakaologin = createAsyncThunk(
+//   'members/kakaologin',
+//   async (code, {rejectedWithValue}, {history}) => {
+//       try {
+//           const res = await instance.get('api/member/login/kakao')
+//           console.log(res)
+//           if(res.headers.authorization){
+//               const ACCESS_TOKEN = res.headers.authorization;
+//               localStorage.setItem('token', ACCESS_TOKEN);
+//               history.push("/main");
+//               return res.data
+//           } else {
+//               history.push("/login")
+//           }
+//           return
+//       } catch (err) {
+//           // console.log("카카오 로그인 실패")
+//           history.push("/login")
+//           return rejectedWithValue(err)
+//       }
+//   }
+// )
 
   
 export const members = createSlice({
@@ -87,7 +126,10 @@ extraReducers: (builder) => {
     });
 
 },
-});
+})
+
+const actionCreators = {kakaologin};
+export {actionCreators};
 
 // export const { login, logout } = members.actions;
 export default members.reducer;

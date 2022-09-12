@@ -9,7 +9,6 @@ const Header = () => {
   const navigate = useNavigate();
 
   const logIn = getCookie("ACCESS_TOKEN");
-  console.log(logIn);
 
   return (
     <>

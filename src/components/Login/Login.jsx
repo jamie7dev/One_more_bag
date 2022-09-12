@@ -1,9 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { KAKAO_AUTH_URL } from "../../shared/OAuth";
-
 import { __memberLogin } from '../../redux/modules/members'; 
 
 const Login = () => {
@@ -16,12 +15,13 @@ const Login = () => {
   const [login, setLogin] = useState(initialState);
 
   const onLoginBtnHandler = () => {
-  if (login.email.trim() === "" || login.password.trim() === "")
-  {return alert("이메일과 비밀번호를 입력하세요.")};
-  dispatch(__memberLogin(login));
-  navigate('/')
-  setLogin(initialState);
+    if (login.email.trim() === "" || login.password.trim() === "")
+    {return alert("이메일과 비밀번호를 입력하세요.")};
+    dispatch(__memberLogin(login));
+    navigate('/')
+    setLogin(initialState);
   };
+
 
   return (
     <>
