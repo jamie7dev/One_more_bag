@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { _getPosts } from '../../redux/modules/list';
 
 const List = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const contents = useSelector((state) => state.list);
+  console.log(contents?.data);
+
+  const [page, setPage] = useState(1);
+
+  useEffect(()=> {
+    dispatch(_getPosts(page));
+  }, []);
   
 
   return (
@@ -44,12 +56,14 @@ const List = () => {
           </Stfilter>
           </StFunction>        
         <StList>
-          <ItemList />
-        </StList>          
+           <ItemList contents={contents?.data} />  
+        </StList>       
         </StContainer>
       </StWrap>
     </Stbody>
   );
+
+  
 };
 const Color = () => {
   const arr = new Array(42).fill("");
@@ -65,19 +79,25 @@ const Color = () => {
   )
 }
 
-const ItemList = () => {
-  const itemList = new Array(30).fill("");
+const ItemList = ({contents}) => {
+    console.log(contents?.content);
+  // const itemList = new Array(30).fill("");
   return (
+    <>
     <StList>
-      {itemList.map((item, key) => (
+      {contents?.content?.map((item) => (
           <div
-            key={key}
+            key={item?.id}
             style={{ display:"grid", border:"1px solid black" }}
           >
-            {item}
+          <img alt='' src={item?.imgUrl} style={{width:'140px',height:'140px'}}/>
+          <div style={{fontSize:'15px'}}>{item?.brand}</div>
+          <div style={{fontSize:'15px'}}>{item?.title}</div>
+          <div style={{fontSize:'15px'}}>{item?.cost}</div>
           </div>
         ))}
     </StList>
+    </>
   )
 }
 
@@ -161,6 +181,5 @@ const StList = styled.div`
     font-weight: bold;
   }
 `
-
 
 
