@@ -86,7 +86,7 @@ export default List;
 const Stbody = styled.div`
   max-width: 1480px;
   min-width: 1140px;
-  margin: 0 auto;
+  margin: 40px auto;
   padding-left: 3%;
 `
 
@@ -94,12 +94,12 @@ const StCategory = styled.div`
   display: flex;
   max-width: 1880px;
   min-width: 1140px;
-  margin: 20px 0;
+  margin: 60px 0;
   justify-content: flex-start;
   flex-wrap: wrap;
   p {
     font-size: 26px;
-    padding: 0 2.4%;
+    padding: 1% 2.4%;
     letter-spacing: 1.5px;
     line-height: 2px;
     cursor: pointer;
