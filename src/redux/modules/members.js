@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { instance } from "../../shared/api";
 import { setCookie } from "../../shared/cookie";
-import axios from 'axios'
+// import axios from 'axios'
+
 
 export const _getMembersEmail = createAsyncThunk(
   'members/_getMembersEmail',
@@ -40,9 +41,10 @@ export const kakaologin = createAsyncThunk(
       try {
           const res = await instance.get(`api/member/kakao?code=${code}`)
           
-          localStorage.setItem("ACCESSTOKEN", res.headers.authorization);
+          localStorage.setItem('token', res.headers.authorization);
+          localStorage.setItem('refreshToken', res.headers.refreshtoken);
           console.log(res);
-          return thunkAPI.fulfillWithValue(res.data);          
+          return thunkAPI.fulfillWithValue(res.data);                    
                     
         } catch (error) {
           console.log("카카오 로그인 실패")
