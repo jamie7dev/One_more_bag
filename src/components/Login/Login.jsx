@@ -11,15 +11,15 @@ const Login = () => {
   const initialState = {
     email:'',
     password:'',
-  }
+  };
   const [login, setLogin] = useState(initialState);
 
   const onLoginBtnHandler = () => {
-    if (login.email.trim() === "" || login.password.trim() === "")
-    {return alert("이메일과 비밀번호를 입력하세요.")};
-    dispatch(__memberLogin(login));
-    navigate('/')
-    setLogin(initialState);
+  if (login.email.trim() === "" || login.password.trim() === "")
+  {return alert("이메일과 비밀번호를 입력하세요.")};
+  dispatch(__memberLogin(login));
+  navigate('/');
+  setLogin(initialState);
   };
 
 
@@ -69,7 +69,8 @@ const Login = () => {
           onClick={()=>{window.location.href = KAKAO_AUTH_URL}} 
           style={{ backgroundColor: '#F5E006' }}>
             카카오 로그인</button>
-          <h3>아직 회원이 아니신가요?</h3>
+          <p></p>
+          <h5>아직 회원이 아니신가요?</h5>
           <button
             style={{ backgroundColor: 'white', border: '1px solid black' }}
             onClick={()=> {navigate('/signup')}}

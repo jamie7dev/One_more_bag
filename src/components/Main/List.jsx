@@ -10,7 +10,7 @@ const List = () => {
   const navigate = useNavigate();
 
   const contents = useSelector((state) => state.list);
-  console.log(contents?.data);
+  // console.log(contents?.data);
 
   const [page, setPage] = useState(1);
 
@@ -54,12 +54,11 @@ const List = () => {
             <p className="total">낮은가격</p>
             <p className="total">높은가격</p>
             <p className="total">조회수</p>
-
           </Stfilter>
           </StFunction>        
         <StList>
-           <ItemList contents={contents?.data} />  
-        </StList>     
+           <ItemList contents={contents?.data} navigate={navigate}/>  
+        </StList>       
         </StContainer>
       </StWrap>
     </Stbody>
@@ -82,9 +81,10 @@ const Color = () => {
   )
 }
 
-const ItemList = ({contents}) => {
-    console.log(contents?.content);
+const ItemList = ({contents, navigate}) => {
+    // console.log(contents?.content);
   // const itemList = new Array(30).fill("");
+
   return (
     <>
     <StList>
@@ -92,8 +92,10 @@ const ItemList = ({contents}) => {
           <div
             key={item?.id}
             style={{ display:"grid" }}
+            onClick={()=>{navigate(`/detail/${item.id}`)}}            
           >
-          <img alt='' src={item?.imgUrl} style={{width:'100%',height:'100%', maxWidth:'177px', minWidth:'160px', maxHeight:'177px', minHeight:'159px',}}/>
+          <img 
+          alt='' src={item?.imgUrl} style={{width:'100%',height:'100%', maxWidth:'177px', minWidth:'160px', maxHeight:'177px', minHeight:'159px',}}/>
           <StBrand>{item?.brand}</StBrand>
           <div style={{fontSize:'13px', color:'#555555'}}>{item?.title}</div>
           <div style={{fontSize:'15px'}}>{item?.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</div>
@@ -206,14 +208,3 @@ const StBrand = styled.div`
   font-family: 'Helvetica Neue';
   padding: 3px 0 0 0;
 `
-
-// const Pagenation = styled.div`
-//   background-color: blue;
-//   position: absolute;
-//   bottom: 0;
-//   /* width: 100%;
-//   text-align: center; */
-//   ul {
-//     display: flex;
-//   }
-// `

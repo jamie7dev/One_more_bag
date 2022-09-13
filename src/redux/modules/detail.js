@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 import { instance } from "../../shared/api";
 
-
-export const _getPosts = createAsyncThunk(
-    'list/_getPosts',
+export const __getDetailInfo = createAsyncThunk(
+    'detail/__getDetailInfo',
     async (payload, thunkAPI) => {
       try {
-        const data = await instance.get(`api/post?page=${payload}`);
-        // console.log(data);
+        const data = await axios.get(`http://43.201.34.71:8080/api/post/${payload}`);
+        console.log(data.data);
         return thunkAPI.fulfillWithValue(data.data.data);
       } catch (error) {
         return thunkAPI.rejectWithValue(error);
@@ -15,29 +15,27 @@ export const _getPosts = createAsyncThunk(
     }
   );
 
-  export const list = createSlice({
-    name:"list", 
+  export const detail = createSlice({
+    name:"detail", 
     initialState:{
-        data:[],
+        detailInfo:{},
         success: false,
         error: null,
         isLoading: false,
     },
-    reducers: {
-
-    },
+    reducers: {},
     
     extraReducers: (builder) => {
     
         builder  
-        .addCase(_getPosts.pending, (state) => {
+        .addCase(__getDetailInfo.pending, (state) => {
         state.isLoading = true; 
         })
-        .addCase(_getPosts.fulfilled, (state, action) => {
+        .addCase(__getDetailInfo.fulfilled, (state, action) => {
         state.isLoading = false; 
-        state.data = action.payload; 
+        state.detailInfo = action.payload;
         })
-        .addCase(_getPosts.rejected, (state, action) => {
+        .addCase(__getDetailInfo.rejected, (state, action) => {
         state.isLoading = false; 
         state.error = action.payload; 
         });
@@ -45,4 +43,4 @@ export const _getPosts = createAsyncThunk(
     },
     });
     
-    export default list.reducer;
+    export default detail.reducer;

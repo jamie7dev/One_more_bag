@@ -1,38 +1,52 @@
-import React, {useState} from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import myinfoinnerStyles from'./MypageComponent.module.css';
+import { __getMypageInfo, __updateUserInfo } from '../../redux/modules/mypage';
+import { getCookie } from "../../shared/cookie";
 
 
 const MypageComponent = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [isEditMode,setIsEditMote] = useState(false); 
+  const logIn = getCookie("ACCESS_TOKEN");
+  const mypageInfo = useSelector((state) => state.mypage.mypageInfo);
   const initialState = {
-    name:'state에서 기존 이름 가져오기',
-    address: '기존 주소',
-    phone: '기존 휴대폰번호',
-  }
+    name: '',
+    address: '',
+    phone: '',
+  };
+  const [isEditMode,setIsEditMote] = useState(false); 
   const [newInfo, setNewinfo] = useState(initialState);
+  console.log(newInfo);
+  
+  useEffect(()=> {
+    dispatch(__getMypageInfo());
+    setNewinfo({
+      name: mypageInfo?.name,
+      address: mypageInfo?.address,
+      phone: mypageInfo?.phone,
+    });
+  },[ mypageInfo?.name, mypageInfo?.address, mypageInfo?.phone ]);
+  
 
   const onChangeHandler = (e) => {
     const {name, value} = e.target;
-    setNewinfo({...newInfo, [name]: value})
+    setNewinfo({...newInfo, [name]: value});
   };
 
   const onSaveBtnHandler = ()=> {
-    // dispatch(__updateUserInfo(newInfo));
-    // alert('회원정보 수정 완료') 이 부분은 모듈에서...
-    console.log(newInfo);
-    navigate('/')
-    setNewinfo(initialState);
+    dispatch(__updateUserInfo(newInfo));
   }; 
 
   
     return (
       <>
-        <Container>
+        { logIn === undefined ? 
+        (<div style={{display:'flex', justifyContent:"center", marginTop: '200px', fontSize:'30px'}}>
+          마이페이지 확인은 회원만 가능합니다.
+          </div>)
+        :(
+          <Container>
           <Item1>
             <div>MY PAGE</div>
             <ul>
@@ -41,7 +55,7 @@ const MypageComponent = () => {
                 onClick={()=>{setIsEditMote(false)}}>내 정보</li>
               ): (
                 <>
-                <li>이혜림 님은<br/>일반회원 입니다.</li><br/>
+                <li>{mypageInfo?.name} 님은<br/>일반회원 입니다.</li><br/>
                 <li onClick={()=>setIsEditMote(false)}>내 정보</li>
                 </>
               )}
@@ -66,7 +80,7 @@ const MypageComponent = () => {
               <MyInfoItem1 className={myinfoinnerStyles.inneritem1}>
                 <div>
                   <div style={{color:'gray'}}>
-                    <div style={{color:'black'}}>회원이름&nbsp;</div> 님은&nbsp;  
+                    <div style={{color:'black'}}>{mypageInfo?.name}&nbsp;</div> 님은&nbsp;  
                     <div style={{color:'black'}}>일반회원&nbsp;</div> 입니다.
                   </div>
                 </div>
@@ -112,15 +126,17 @@ const MypageComponent = () => {
               <input 
               required
               name='address'
-              value={newInfo.address}
+              value={newInfo?.address}
               onChange={onChangeHandler}
               />
-              <div>휴대전화 <span style={{color:'#FF6200'}}>*필수</span></div>
+              <div>휴대전화 <span style={{color:'#FF6200'}}>*필수 11자리</span></div>
               <input 
               required
               name='phone'
-              value={newInfo.phone}
-              onChange={onChangeHandler}
+              value={newInfo?.phone}
+              onChange={(e)=> {setNewinfo({...newInfo, phone: e.target.value.replace(/[^0-9]/g, '')})}}
+              minLength={11}
+              maxLength={11}
               />
               <p></p>
               <Btns>
@@ -139,6 +155,7 @@ const MypageComponent = () => {
               )} 
           </Item2>
         </Container>
+        ) }
       </>
     );
 }
