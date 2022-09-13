@@ -49,7 +49,7 @@ const Signup = () => {
   const sameIdList = userEmailList?.filter((email) => email.id === member.email );
   const regexEmailId = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
   const regexPassword = /^(?=.*?[a-zA-z])(?=.*?[0-9]).{4,12}$/;
-  const regexPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+  const regexPhone = /^01([0|1|6|7|8|9])-?([0-9]{4})-?([0-9]{4})$/;
 
   return (
       <Container>
@@ -153,6 +153,7 @@ const Signup = () => {
             name='phone'
             value={member.phone}
             onChange={(e)=> {setMember({...member, phone: e.target.value.replace(/[^0-9]/g, '')})}}
+            minLength={11}
             maxLength={11}
             />
             {

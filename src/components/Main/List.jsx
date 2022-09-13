@@ -9,7 +9,7 @@ const List = () => {
   const navigate = useNavigate();
 
   const contents = useSelector((state) => state.list);
-  console.log(contents?.data);
+  // console.log(contents?.data);
 
   const [page, setPage] = useState(1);
 
@@ -93,7 +93,7 @@ const Color = () => {
 }
 
 const ItemList = ({contents}) => {
-    console.log(contents?.content);
+    // console.log(contents?.content);
   // const itemList = new Array(30).fill("");
   return (
     <>
