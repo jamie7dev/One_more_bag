@@ -9,6 +9,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const logIn = getCookie("ACCESS_TOKEN");
+  // console.log(logIn);
 
   return (
     <>
@@ -76,6 +77,7 @@ const StHdCategory = styled.div`
   width: 100%;
   justify-content: space-between;
   font-family: "GillSansMTPro-Book";
+  z-index: 0;
   a, button {
       text-decoration: none;
       color: black;
@@ -96,9 +98,9 @@ const StLogo = styled.p`
 const StHdBtn = styled.p`
   background-color: white;
   border-radius: 50px;
-  padding: 5px 0;
+  padding: 5px 10px;
   font-size: 28px;
-  line-height: 38px;
+  line-height: 40px;
   letter-spacing: 2.5px;
   cursor: pointer;
 `
