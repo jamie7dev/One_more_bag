@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { _getPosts } from '../../redux/modules/list';
+// import ReactPaginate from 'react-paginate';
 
 const List = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const List = () => {
   useEffect(()=> {
     dispatch(_getPosts(page));
   }, []);
+  
   
 
   return (
@@ -62,6 +64,7 @@ const List = () => {
     </Stbody>
   );
 
+
   
 };
 const Color = () => {
@@ -104,8 +107,12 @@ const ItemList = ({contents, navigate}) => {
   )
 }
 
+
+
 export default List;
 
+
+//styled components
 const Stbody = styled.div`
   max-width: 1380px;
   min-width: 1140px;
@@ -176,12 +183,13 @@ const Stfilter = styled.div`
 `
 const StList = styled.div`
   /* width: 100vw; */
-  height: 100vh;
+  /* height: 100vh; */
   margin: 10px 0;
   
   display: grid;
   grid-template-columns: repeat(6, 40%);
-  grid-template-rows: repeat(5, 30%);
+  /* grid-template-rows: repeat(5, 30%); */
+  grid-auto-rows: minmax(auto);
   grid-gap: 7px;
   z-index: -1;
   .item {

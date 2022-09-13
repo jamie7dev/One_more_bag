@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { instance } from "../../shared/api";
 
+
 export const _getPosts = createAsyncThunk(
     'list/_getPosts',
     async (payload, thunkAPI) => {
