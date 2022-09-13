@@ -11,14 +11,14 @@ const Login = () => {
   const initialState = {
     email:'',
     password:'',
-  }
+  };
   const [login, setLogin] = useState(initialState);
 
   const onLoginBtnHandler = () => {
   if (login.email.trim() === "" || login.password.trim() === "")
   {return alert("이메일과 비밀번호를 입력하세요.")};
   dispatch(__memberLogin(login));
-  navigate('/')
+  navigate('/');
   setLogin(initialState);
   };
 
