@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Search } from 'react-bootstrap-icons';
-import { useNavigate } from 'react-router-dom';
 import { deleteCookie, getCookie } from "../../shared/cookie";
 
 const Header = () => {
-
   const navigate = useNavigate();
+  const [accesstoken,setAccess] = useState(undefined);
 
-  const logIn = getCookie("ACCESS_TOKEN");
-  // console.log(logIn);
+  useEffect(()=>{
+    let b = setTimeout(()=>{setAccess(getCookie("ACCESS_TOKEN"))},1000);
+    return ()=>{
+      clearTimeout(b);
+    }
+  },[window.location.href, accesstoken, navigate]);
+
+  useEffect(()=>{
+    setAccess(getCookie("ACCESS_TOKEN"));
+  });
 
   return (
     <>
@@ -28,26 +37,29 @@ const Header = () => {
             <StUserBtn>
               {/* 로그인 하면 마이페이지 보여주고 로그아웃 상태면 로그인 보여주기 */}
               {
-                logIn === undefined ?
-                (<p onClick={()=>navigate('/login')}>LOGIN</p>)
+                accesstoken === "undefined" || accesstoken === undefined?
+                (
+                  <>
+                  <p onClick={()=>{navigate('/login')}}>LOGIN</p>
+                  <p onClick={()=>navigate('/signup')}>JOIN</p>
+                </>
+                )
                 :
-                (<p onClick={()=>{
-                  alert('로그아웃 되었습니다.')
-                  navigate("/");
-                  deleteCookie("ACCESS_TOKEN");
-                  deleteCookie("REFRESH_TOKEN");
-                  deleteCookie("isLogin");
-                  window.localStorage.removeItem("name");
-                }}>LOGOUT</p>)
-              }
-              { 
-                logIn === undefined ? 
-                (<p onClick={()=>navigate('/signup')}>JOIN</p>) 
-                : 
-                (<p onClick={()=>navigate('/mypage')}>MY PAGE</p>)
-              }
-              {
-                logIn === undefined ? (null) : (<p onClick={()=>navigate('/cart')}>BAG/0</p>)
+                (
+                  <>
+                    <p onClick={()=>{
+                      deleteCookie("ACCESS_TOKEN");
+                      deleteCookie("REFRESH_TOKEN");
+                      deleteCookie("isLogin");
+                      alert('로그아웃 되었습니다.')
+                      setAccess("undefined")
+                      window.localStorage.removeItem("name");
+                      navigate("/");
+                    }}>LOGOUT</p>
+                    <p onClick={()=>navigate('/mypage')}>MY PAGE</p>
+                    <p onClick={()=>navigate('/cart')}>BAG/0</p>
+                  </>
+                )
               }
             </StUserBtn>
             <EngBtn>EN</EngBtn>
@@ -110,7 +122,6 @@ const Label = styled.div`
 `
 
 const StUserBtn = styled.div`
-
   display: flex;
   font-size: 15px;
   margin-top: 16px;
