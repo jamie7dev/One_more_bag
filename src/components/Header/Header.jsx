@@ -83,6 +83,7 @@ const StHeader = styled.div`
   top: 18px;
 `
 const StHdCategory = styled.div`
+  /* background-color: green; */
   /* position: absolute; */
   display: flex;
   /* align-items: center; */

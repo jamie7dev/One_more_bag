@@ -95,7 +95,7 @@ const ItemList = ({contents, navigate}) => {
             onClick={()=>{navigate(`/detail/${item.id}`)}}            
           >
           <img 
-          alt='' src={item?.imgUrl} style={{width:'100%',height:'100%', maxWidth:'177px', minWidth:'160px', maxHeight:'177px', minHeight:'159px',}}/>
+          alt='' src={item?.imgUrl} style={{width:'100%',height:'100%', maxWidth:'177px', minWidth:'160px', maxHeight:'177px', minHeight:'159px'}}/>
           <StBrand>{item?.brand}</StBrand>
           <div style={{fontSize:'13px', color:'#555555'}}>{item?.title}</div>
           <div style={{fontSize:'15px'}}>{item?.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</div>
@@ -191,7 +191,7 @@ const StList = styled.div`
   /* grid-template-rows: repeat(5, 30%); */
   grid-auto-rows: minmax(auto);
   grid-gap: 7px;
-  z-index: -1;
+  z-index: 1;
   .item {
     display: flex;
     justify-content: center;
