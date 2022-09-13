@@ -174,7 +174,7 @@ const Container = styled.div`
 `;
 
 const Item1 = styled.div`
-/* background-color: yellow; */
+background-color: yellow;
   padding-left: 10px;
   div, ul, li{
     font-family: 'Gill Sans', 'Gill Sans MT', 'Lato', 'Noto Sans KR', Helvetica,
@@ -198,7 +198,7 @@ const Item1 = styled.div`
 `;
 
 const Item2 = styled.div`
-/* background-color: blue; */
+background-color: blue;
   grid-column: 2 / -1;
   grid-row: 1 / -1;
   display: flex;

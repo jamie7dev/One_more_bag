@@ -14,21 +14,21 @@
 }
 
 .inneritem1 {
-  /* background-color: yellow;  */
+  background-color: yellow; 
   grid-area: a;
   display: flex;
   align-items: center;
 }
 
 .inneritem2 {
-  /* background-color: blueviolet; */
+  background-color: blueviolet;
   grid-area: b;
   display: flex;
   align-items: center;
 }
 
 .inneritem3 {
-  /* background-color: deeppink; */
+  background-color: deeppink;
   grid-area: c;
 }
 
