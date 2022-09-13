@@ -58,6 +58,19 @@ const List = () => {
         <StList>
            <ItemList contents={contents?.data} />  
         </StList>       
+        <Pagenation>
+        <ul>
+          <li><a href="#" className="num">&#60;&#60;</a></li>
+          <li><a href="#" className="num">PREV</a></li>
+          <li><a href="#" className="num">1</a></li>
+          <li><a href="#" className="num">2</a></li>
+          <li><a href="#" className="num">3</a></li>
+          <li><a href="#" className="num">4</a></li>
+          <li><a href="#" className="num">5</a></li>
+          <li><a href="#" className="num">&#62;&#62;</a></li>
+          <li><a href="#" className="num">NEXT</a></li>
+        </ul>
+        </Pagenation>
         </StContainer>
       </StWrap>
     </Stbody>
@@ -88,15 +101,16 @@ const ItemList = ({contents}) => {
       {contents?.content?.map((item) => (
           <div
             key={item?.id}
-            style={{ display:"grid", border:"1px solid black" }}
+            style={{ display:"grid" }}
           >
-          <img alt='' src={item?.imgUrl} style={{width:'140px',height:'140px'}}/>
-          <div style={{fontSize:'15px'}}>{item?.brand}</div>
-          <div style={{fontSize:'15px'}}>{item?.title}</div>
-          <div style={{fontSize:'15px'}}>{item?.cost}</div>
+          <img alt='' src={item?.imgUrl} style={{width:'100%',height:'100%', maxWidth:'177px', minWidth:'160px', maxHeight:'177px', minHeight:'159px',}}/>
+          <StBrand>{item?.brand}</StBrand>
+          <div style={{fontSize:'13px', color:'#555555'}}>{item?.title}</div>
+          <div style={{fontSize:'15px'}}>{item?.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</div>
           </div>
         ))}
     </StList>
+    
     </>
   )
 }
@@ -104,7 +118,7 @@ const ItemList = ({contents}) => {
 export default List;
 
 const Stbody = styled.div`
-  max-width: 1480px;
+  max-width: 1380px;
   min-width: 1140px;
   margin: 40px auto;
   padding-left: 3%;
@@ -132,30 +146,39 @@ const StWrap = styled.div`
   justify-content: space-between;
   padding-top: 50px;
   padding-bottom: 100px;
+  
 `
 const StSidebar = styled.div`
-  width: 16.6666%;
+  width: 30%;
+  min-width: 180px;
+  max-width: 240px;
 `
 const StContainer = styled.div`
-  width: 83.3333%;
+  width: 100%;
   padding-left: 1.8%;
+  position: relative;
 `
 const StFunction = styled.div`
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  
 `
 const StTotal = styled.div`
   height: 20px;
   font-size: 14px;
   color: #484850;
-  line-height: 30px;
+  line-height: 10px;
 `
 const Stfilter = styled.div`
+  /* background-color: green; */
   display: flex;
-  width: 400px;
+  position: absolute;
+  right: 0;
+  width: 300px;
   height: 20px;
   line-height: 10px;
   padding-bottom: 10px;
+
   p {
     color: #484850;
     font-size: 14px;
@@ -167,19 +190,35 @@ const StList = styled.div`
   height: 100vh;
   margin: 10px 0;
   
-  /* background-color: yellow; */
   display: grid;
-  grid-template-columns: repeat(6, 39%);
+  grid-template-columns: repeat(6, 40%);
   grid-template-rows: repeat(5, 30%);
-  grid-gap: 10px;
+  grid-gap: 7px;
+  z-index: -1;
   .item {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     font-size: 1.2rem;
     font-weight: bold;
   }
 `
+const StBrand = styled.div`
+  /* background-color: wheat; */
+  font-weight: bold;
+  font-size: 15px;
+  font-family: 'Helvetica Neue';
+  padding: 3px 0 0 0;
+`
 
-
+const Pagenation = styled.div`
+  background-color: blue;
+  position: absolute;
+  bottom: 0;
+  /* width: 100%;
+  text-align: center; */
+  ul {
+    display: flex;
+  }
+`
