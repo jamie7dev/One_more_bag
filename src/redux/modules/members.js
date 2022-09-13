@@ -46,8 +46,8 @@ export const kakaologin = createAsyncThunk(
       try {
           const res = await instance.get(`api/member/kakao?code=${code}`)   //백엔드로 인가코드 보내기
           
-          localStorage.setItem('token', res.headers.authorization);
-          localStorage.setItem('refreshToken', res.headers.refreshtoken);
+          localStorage.setItem("ACCESS_TOKEN", res.headers.authorization);
+          localStorage.setItem("REFRESHTOKEN", res.headers.refreshtoken);
           console.log(res);
           alert('로그인 되었습니다.');
           return thunkAPI.fulfillWithValue(res.data);                    
@@ -58,6 +58,7 @@ export const kakaologin = createAsyncThunk(
       }
   }
 );
+
 
   
 export const members = createSlice({
