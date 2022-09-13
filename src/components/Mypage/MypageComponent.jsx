@@ -8,7 +8,7 @@ import { getCookie } from "../../shared/cookie";
 
 const MypageComponent = () => {
   const dispatch = useDispatch();
-  const logIn = getCookie("ACCESS_TOKEN");
+  // const logIn = getCookie("ACCESS_TOKEN");
   const mypageInfo = useSelector((state) => state.mypage.mypageInfo);
   const initialState = {
     name: '',
@@ -41,11 +41,11 @@ const MypageComponent = () => {
   
     return (
       <>
-        { logIn === undefined ? 
+        {/* { logIn === undefined ? 
         (<div style={{display:'flex', justifyContent:"center", marginTop: '200px', fontSize:'30px'}}>
           마이페이지 확인은 회원만 가능합니다.
           </div>)
-        :(
+        :( */}
           <Container>
           <Item1>
             <div>MY PAGE</div>
@@ -155,7 +155,7 @@ const MypageComponent = () => {
               )} 
           </Item2>
         </Container>
-        ) }
+        {/* ) } */}
       </>
     );
 }
@@ -174,7 +174,7 @@ const Container = styled.div`
 `;
 
 const Item1 = styled.div`
-background-color: yellow;
+/* background-color: yellow; */
   padding-left: 10px;
   div, ul, li{
     font-family: 'Gill Sans', 'Gill Sans MT', 'Lato', 'Noto Sans KR', Helvetica,
@@ -198,7 +198,7 @@ background-color: yellow;
 `;
 
 const Item2 = styled.div`
-background-color: blue;
+/* background-color: blue; */
   grid-column: 2 / -1;
   grid-row: 1 / -1;
   display: flex;

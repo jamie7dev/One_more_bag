@@ -8,16 +8,21 @@ import { deleteCookie, getCookie } from "../../shared/cookie";
 const Header = () => {
   const navigate = useNavigate();
   const [accesstoken,setAccess] = useState(undefined);
+  const [kakaoAccesstoken, setKakaoAccess] = useState(undefined);
 
   useEffect(()=>{
-    let b = setTimeout(()=>{setAccess(getCookie("ACCESS_TOKEN"))},1000);
+    let b = setTimeout(()=>{
+      setAccess(getCookie("ACCESS_TOKEN"));
+      setKakaoAccess(localStorage.getItem("ACCESS_TOKEN"));
+    },1000);
     return ()=>{
       clearTimeout(b);
     }
-  },[window.location.href, accesstoken, navigate]);
+  },[window.location.href, accesstoken, kakaoAccesstoken, navigate]);
 
   useEffect(()=>{
     setAccess(getCookie("ACCESS_TOKEN"));
+    setKakaoAccess(localStorage.getItem("ACCESS_TOKEN"));
   });
 
   return (
@@ -37,7 +42,7 @@ const Header = () => {
             <StUserBtn>
               {/* 로그인 하면 마이페이지 보여주고 로그아웃 상태면 로그인 보여주기 */}
               {
-                accesstoken === "undefined" || accesstoken === undefined?
+                accesstoken === "undefined" || accesstoken === undefined || kakaoAccesstoken === "undefined" || kakaoAccesstoken === undefined?
                 (
                   <>
                   <p onClick={()=>{navigate('/login')}}>LOGIN</p>
