@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { _getPosts } from '../../redux/modules/list';
+// import ReactPaginate from 'react-paginate';
 
 const List = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const List = () => {
   useEffect(()=> {
     dispatch(_getPosts(page));
   }, []);
+  
   
 
   return (
@@ -57,24 +59,12 @@ const List = () => {
           </StFunction>        
         <StList>
            <ItemList contents={contents?.data} />  
-        </StList>       
-        <Pagenation>
-        <ul>
-          <li><a href="#" className="num">&#60;&#60;</a></li>
-          <li><a href="#" className="num">PREV</a></li>
-          <li><a href="#" className="num">1</a></li>
-          <li><a href="#" className="num">2</a></li>
-          <li><a href="#" className="num">3</a></li>
-          <li><a href="#" className="num">4</a></li>
-          <li><a href="#" className="num">5</a></li>
-          <li><a href="#" className="num">&#62;&#62;</a></li>
-          <li><a href="#" className="num">NEXT</a></li>
-        </ul>
-        </Pagenation>
+        </StList>     
         </StContainer>
       </StWrap>
     </Stbody>
   );
+
 
   
 };
@@ -115,8 +105,12 @@ const ItemList = ({contents}) => {
   )
 }
 
+
+
 export default List;
 
+
+//styled components
 const Stbody = styled.div`
   max-width: 1380px;
   min-width: 1140px;
@@ -187,12 +181,13 @@ const Stfilter = styled.div`
 `
 const StList = styled.div`
   /* width: 100vw; */
-  height: 100vh;
+  /* height: 100vh; */
   margin: 10px 0;
   
   display: grid;
   grid-template-columns: repeat(6, 40%);
-  grid-template-rows: repeat(5, 30%);
+  /* grid-template-rows: repeat(5, 30%); */
+  grid-auto-rows: minmax(auto);
   grid-gap: 7px;
   z-index: -1;
   .item {
@@ -212,13 +207,13 @@ const StBrand = styled.div`
   padding: 3px 0 0 0;
 `
 
-const Pagenation = styled.div`
-  background-color: blue;
-  position: absolute;
-  bottom: 0;
-  /* width: 100%;
-  text-align: center; */
-  ul {
-    display: flex;
-  }
-`
+// const Pagenation = styled.div`
+//   background-color: blue;
+//   position: absolute;
+//   bottom: 0;
+//   /* width: 100%;
+//   text-align: center; */
+//   ul {
+//     display: flex;
+//   }
+// `
