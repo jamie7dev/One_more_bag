@@ -16,6 +16,7 @@ instance.interceptors.request.use(
         // axios 설정값을 넣습니다. (사용자 정의 설정도 추가 가능)
         const token = getCookie("ACCESS_TOKEN");
         const refreshToken = getCookie("REFRESH_TOKEN");
+        
 
         config.headers.Authorization = token;
         config.headers.refreshToken = refreshToken;
