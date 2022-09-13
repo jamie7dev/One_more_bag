@@ -38,7 +38,7 @@ const Detail = () => {
             </Brand>
             <ItemTitle>{detailInfo.title}</ItemTitle>
             <ItemPrice>
-              <p>{detailInfo.cost}원</p>
+              <p>{detailInfo.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</p>
               <img alt='' src ="https://onemorebag.kr/web/upload/icon_201909191819336000.png" width="20px" height="20px" />
             </ItemPrice>
             <DtDesc>
@@ -73,12 +73,10 @@ const Detail = () => {
               </div>              
             </DtDesc>
             
-            
-            
           </RightTop>
           <TotalPrice>
               <p style={{fontSize:"14px", paddingTop:"10px"}}>총 상품금액 :</p>
-              <p style={{fontSize:"20px", paddingTop:"5px"}}>{detailInfo.cost}원</p>              
+              <p style={{fontSize:"20px", paddingTop:"5px"}}>{detailInfo.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</p>              
           </TotalPrice>
           <Bottom>
             
@@ -174,16 +172,14 @@ const DtDesc = styled.div`
     font-size: 13px;
     font-weight: lighter;
     color: #555555;
-    
     padding-top: 15px;
   }
   p {
-    width: 30%;
+    width: 100%;
     position: absolute;
     left: 120px;
     font-size: 13px;
-    line-height: 34px;
-    padding-top: 5px;
+    padding-top: 12px;
   }
   select {
     width: 400px;
