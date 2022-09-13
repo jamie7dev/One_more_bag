@@ -1,54 +1,66 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
+import { __getDetailInfo } from '../../redux/modules/detail';
 
 
 const Detail = () => { 
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
+  const dispatech = useDispatch()
   const navigate = useNavigate();
+  const {id} = useParams();
 
+  const detailInfo = useSelector((state)=> state.detail.detailInfo);
+  // detailInfo에는 id가 없음
+  // console.log(detailInfo);
+
+  useEffect(()=> {
+    dispatech(__getDetailInfo(id));
+  }, []);
 
   return(
     <>
       <Container>
         <Left>
-          <img src='https://onemorebag.kr/web/product/big/202209/7d914039fb18216dfa01e7ee6aca1789.jpg' width="680px" />
+          <img alt='' src={detailInfo.imgUrl} width="680px" />
         </Left>
         <Right>
           <RightTop>
             <Brand>
-              <h3>인더비기닝</h3>
+              <h3>{detailInfo.brand}</h3>
               <div>
-                <img src="https://onemorebag.kr/web/imgs/brand-home@2x.png" width="20px" height="20px"/>
+                <img alt='' src="https://onemorebag.kr/web/imgs/brand-home@2x.png" width="20px" height="20px"/>
                 <p>Brand</p>
               </div>
             </Brand>
-            <ItemTitle>fogni round pouch</ItemTitle>
+            <ItemTitle>{detailInfo.title}</ItemTitle>
             <ItemPrice>
-              <p>18,000원</p>
-              <img src ="https://onemorebag.kr/web/upload/icon_201909191819336000.png" width="20px" height="20px" />
+              <p>{detailInfo.cost}원</p>
+              <img alt='' src ="https://onemorebag.kr/web/upload/icon_201909191819336000.png" width="20px" height="20px" />
             </ItemPrice>
             <DtDesc>
               <div>
                 <h5>DETAILS</h5>
-                <p>크기</p>
+                <p>{detailInfo.desc}</p>
               </div>
               <div>
                 <h5>POINT</h5>
-                <p>80원</p>
+                <p>{detailInfo.point}</p>
               </div>
               <div>
                 <h5>재고 수량</h5>
-                <p>1</p>
+                <p>{detailInfo.cnt}</p>
               </div>
               <div>
-                <h5>색상</h5>                
+                {/* <h5>색상</h5>                
                 <select name="item-color" onChange={()=>{setShow(!show)}}>
                     <option value="">- 옵션을 선택해 주세요 -</option>
                     <option value="베이지">베이지</option>
                     <option value="딥브라운">딥브라운</option>
-                </select>
+                </select> */}
                 {/* {show ?
                   <div>
                     <p>[인더비기닝] fogni round pouch</p>
@@ -66,7 +78,7 @@ const Detail = () => {
           </RightTop>
           <TotalPrice>
               <p style={{fontSize:"14px", paddingTop:"10px"}}>총 상품금액 :</p>
-              <p style={{fontSize:"20px", paddingTop:"5px"}}>18,000원</p>              
+              <p style={{fontSize:"20px", paddingTop:"5px"}}>{detailInfo.cost}원</p>              
           </TotalPrice>
           <Bottom>
             

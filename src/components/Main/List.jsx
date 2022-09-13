@@ -52,25 +52,11 @@ const List = () => {
             <p className="total">낮은가격</p>
             <p className="total">높은가격</p>
             <p className="total">조회수</p>
-
           </Stfilter>
           </StFunction>        
         <StList>
-           <ItemList contents={contents?.data} />  
+           <ItemList contents={contents?.data} navigate={navigate}/>  
         </StList>       
-        <Pagenation>
-        <ul>
-          <li><a href="#" className="num">&#60;&#60;</a></li>
-          <li><a href="#" className="num">PREV</a></li>
-          <li><a href="#" className="num">1</a></li>
-          <li><a href="#" className="num">2</a></li>
-          <li><a href="#" className="num">3</a></li>
-          <li><a href="#" className="num">4</a></li>
-          <li><a href="#" className="num">5</a></li>
-          <li><a href="#" className="num">&#62;&#62;</a></li>
-          <li><a href="#" className="num">NEXT</a></li>
-        </ul>
-        </Pagenation>
         </StContainer>
       </StWrap>
     </Stbody>
@@ -92,9 +78,10 @@ const Color = () => {
   )
 }
 
-const ItemList = ({contents}) => {
+const ItemList = ({contents, navigate}) => {
     // console.log(contents?.content);
   // const itemList = new Array(30).fill("");
+
   return (
     <>
     <StList>
@@ -102,8 +89,10 @@ const ItemList = ({contents}) => {
           <div
             key={item?.id}
             style={{ display:"grid" }}
+            onClick={()=>{navigate(`/detail/${item.id}`)}}            
           >
-          <img alt='' src={item?.imgUrl} style={{width:'100%',height:'100%', maxWidth:'177px', minWidth:'160px', maxHeight:'177px', minHeight:'159px',}}/>
+          <img 
+          alt='' src={item?.imgUrl} style={{width:'100%',height:'100%', maxWidth:'177px', minWidth:'160px', maxHeight:'177px', minHeight:'159px',}}/>
           <StBrand>{item?.brand}</StBrand>
           <div style={{fontSize:'13px', color:'#555555'}}>{item?.title}</div>
           <div style={{fontSize:'15px'}}>{item?.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</div>
@@ -210,15 +199,4 @@ const StBrand = styled.div`
   font-size: 15px;
   font-family: 'Helvetica Neue';
   padding: 3px 0 0 0;
-`
-
-const Pagenation = styled.div`
-  background-color: blue;
-  position: absolute;
-  bottom: 0;
-  /* width: 100%;
-  text-align: center; */
-  ul {
-    display: flex;
-  }
 `

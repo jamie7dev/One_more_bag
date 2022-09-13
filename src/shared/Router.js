@@ -17,7 +17,7 @@ const Router = () => {
         <Route path='signup' element={<SignupPage />}/>
         <Route path='login' element={<LoginPage />}/>
         <Route path='mypage' element={<Mypage />}/>
-        <Route path='detail' element={<DetailPage />}/>
+        <Route path='detail/:id' element={<DetailPage />}/>
         <Route path='cart' element={<CartPage />}/>
         <Route path="/auth/kakao/callback" element={<KaKao />} />
       </Routes>
