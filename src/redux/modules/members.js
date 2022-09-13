@@ -3,6 +3,7 @@ import { instance } from "../../shared/api";
 import { setCookie } from "../../shared/cookie";
 // import axios from 'axios'
 
+
 export const _getMembersEmail = createAsyncThunk(
   'members/_getMembersEmail',
   async (payload, thunkAPI) => {
@@ -37,6 +38,69 @@ export const __memberLogin = createAsyncThunk(
     }
   }
 );
+export const kakaologin = createAsyncThunk(
+  'members/kakaoLogin',
+  async (code, thunkAPI) => {
+      try {
+          const res = await instance.get(`api/member/kakao?code=${code}`)
+          
+          localStorage.setItem('token', res.headers.authorization);
+          localStorage.setItem('refreshToken', res.headers.refreshtoken);
+          console.log(res);
+          return thunkAPI.fulfillWithValue(res.data);                    
+                    
+        } catch (error) {
+          console.log("카카오 로그인 실패")
+          return thunkAPI.rejectWithValue(error);
+      }
+  }
+);
+
+// export const kakaologin = createAsyncThunk(
+//   'members/kakaologin',
+//   async (code, {rejectedWithValue}, {history}) => {
+//       try {
+//           const res = await instance.get('api/member/login/kakao')
+//           console.log(res)
+//           if(res.headers.authorization){
+//               const ACCESS_TOKEN = res.headers.authorization;
+//               localStorage.setItem('token', ACCESS_TOKEN);
+//               history.push("/main");
+//               return res.data
+//           } else {
+//               history.push("/login")
+//           }
+//           return
+//       } catch (err) {
+//           // console.log("카카오 로그인 실패")
+//           history.push("/login")
+//           return rejectedWithValue(err)
+//       }
+//   }
+// )
+
+// export const kakaologin = createAsyncThunk(
+//   'members/kakaologin',
+//   async (code, {rejectedWithValue}, {history}) => {
+//       try {
+//           const res = await instance.get('api/member/login/kakao')
+//           console.log(res)
+//           if(res.headers.authorization){
+//               const ACCESS_TOKEN = res.headers.authorization;
+//               localStorage.setItem('token', ACCESS_TOKEN);
+//               history.push("/main");
+//               return res.data
+//           } else {
+//               history.push("/login")
+//           }
+//           return
+//       } catch (err) {
+//           // console.log("카카오 로그인 실패")
+//           history.push("/login")
+//           return rejectedWithValue(err)
+//       }
+//   }
+// )
 
   
 export const members = createSlice({
@@ -94,7 +158,10 @@ extraReducers: (builder) => {
     });
 
 },
-});
+})
+
+const actionCreators = {kakaologin};
+export {actionCreators};
 
 // export const { login, logout } = members.actions;
 export default members.reducer;

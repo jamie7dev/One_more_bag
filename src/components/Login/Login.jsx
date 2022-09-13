@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-
+import { KAKAO_AUTH_URL } from "../../shared/OAuth";
 import { __memberLogin } from '../../redux/modules/members'; 
 
 const Login = () => {
@@ -21,6 +21,7 @@ const Login = () => {
   navigate('/');
   setLogin(initialState);
   };
+
 
   return (
     <>
@@ -65,11 +66,10 @@ const Login = () => {
             네이버 로그인
           </button> */}
           <button 
-          style={{ backgroundColor: '#F5E006' }}
-          // onClick={}
-          >카카오 로그인</button>
-          <p></p>
-          <h5>아직 회원이 아니신가요?</h5>
+          onClick={()=>{window.location.href = KAKAO_AUTH_URL}} 
+          style={{ backgroundColor: '#F5E006' }}>
+            카카오 로그인</button>
+          <h3>아직 회원이 아니신가요?</h3>
           <button
             style={{ backgroundColor: 'white', border: '1px solid black' }}
             onClick={()=> {navigate('/signup')}}

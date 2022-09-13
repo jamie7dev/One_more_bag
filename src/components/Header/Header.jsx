@@ -89,6 +89,7 @@ const StHdCategory = styled.div`
   width: 100%;
   justify-content: space-between;
   font-family: "GillSansMTPro-Book";
+  z-index: 0;
   a, button {
       text-decoration: none;
       color: black;
@@ -109,9 +110,9 @@ const StLogo = styled.p`
 const StHdBtn = styled.p`
   background-color: white;
   border-radius: 50px;
-  padding: 5px 0;
+  padding: 5px 10px;
   font-size: 28px;
-  line-height: 38px;
+  line-height: 40px;
   letter-spacing: 2.5px;
   cursor: pointer;
 `
@@ -135,6 +136,7 @@ const StUserBtn = styled.div`
   }
 `
 const EngBtn = styled.p`
+  background-color: white;
   border: 1.5px solid black;
   width: 36px;
   height: 36px;
@@ -143,5 +145,6 @@ const EngBtn = styled.p`
   font-weight: bold;
   text-align: center;
   line-height: 40px;
+  margin-left: 1%;
   cursor: pointer;
 `
