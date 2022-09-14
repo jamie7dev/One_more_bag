@@ -133,7 +133,7 @@ const StHdCategory = styled.div`
   width: 100%;
   justify-content: space-between;
   font-family: "GillSansMTPro-Book";
-  z-index: 0;
+  /* z-index: 0; */
   a, button {
       text-decoration: none;
       color: black;

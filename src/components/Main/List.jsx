@@ -49,7 +49,7 @@ const List = () => {
         </StSidebar>
         <StContainer>
           <StFunction>
-          <StTotal>TOTAL</StTotal>
+          <StTotal>TOTAL 762</StTotal>
           <Stfilter>          
             <p className="total">신상품</p>
             <p className="total">상품명</p>
