@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { KAKAO_AUTH_URL } from "../../shared/OAuth";
 import { __memberLogin } from '../../redux/modules/members'; 
+
+import { _getMembersEmail } from '../../redux/modules/members'; 
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -13,13 +15,23 @@ const Login = () => {
     password:'',
   };
   const [login, setLogin] = useState(initialState);
+  const userEmailList = useSelector((state)=>state.members?.membersEmail);
+  const sameIdList = userEmailList?.filter((email) => email === login.email );
+
+  useEffect(()=>{
+    dispatch(_getMembersEmail());
+  },[]);
 
   const onLoginBtnHandler = () => {
   if (login.email.trim() === "" || login.password.trim() === "")
   {return alert("이메일과 비밀번호를 입력하세요.")};
-  dispatch(__memberLogin(login));
-  navigate('/');
-  setLogin(initialState);
+  if ( login.email && (sameIdList?.length === 0)) {
+    return alert("회원가입 후 로그인이 가능합니다.")
+  } else {
+    dispatch(__memberLogin(login));
+    navigate('/');
+    setLogin(initialState);
+  }
   };
 
 

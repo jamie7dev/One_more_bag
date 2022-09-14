@@ -12,7 +12,7 @@ const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userEmailList = useSelector((state)=>state.members?.membersEmail);
-  // console.log(userEmailList);
+  console.log(userEmailList);
 
   const initialState = {
     email:'',
@@ -46,7 +46,7 @@ const Signup = () => {
   }; 
 
   // 유효성 검사 이메일(아이디), 비밀번호, 휴대폰번호 정규표현식
-  const sameIdList = userEmailList?.filter((email) => email.id === member.email );
+  const sameIdList = userEmailList?.filter((email) => email === member.email );
   const regexEmailId = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
   const regexPassword = /^(?=.*?[a-zA-z])(?=.*?[0-9]).{4,12}$/;
   const regexPhone = /^01([0|1|6|7|8|9])-?([0-9]{4})-?([0-9]{4})$/;
