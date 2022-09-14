@@ -1,17 +1,29 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { __getCart } from '../../redux/modules/cart';
+import { instance } from '../../shared/api';
 
 const Cart = () => {
+  const dispatch = useDispatch();
+  const cart = useSelector((state)=>state.cart);
   const [count, setCount] = useState(0);
 
-  const item = {
-    data: [
-      {id:"", imgUrl:"", title:"", desc:"", cost:""},
-      {id:"1", imgUrl:"이미지", title:"[인더비기닝]", desc:"fogni round pouch", cost:"18000"}
-    ]
-  }
-  let [arr, setArr] = useState(new Array(item.data.length).fill(0));
+  useEffect(()=>{
+    dispatch(__getCart());
+  },[dispatch, cart.cart.length])
+
+  let [arr, setArr] = useState(new Array(cart?.cart?.length).fill(1));
   
+  const removeItem = async(id) => {
+    try {
+      let response = await instance.delete('api/member/cart', {data:{postId:[id]}});
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
       <Container>
@@ -33,22 +45,59 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
-            {item.data.map((item, i)=>{
+            {cart?.cart?.map((item, i)=>{
               return (
                 <tr style={{textAlign:"center"}} key={item.id}>
-                  <th scope="row"><input type="checkbox" id={item.id} /></th>
-                  <td style={{width:"80px", height:"80px"}}>{item.imgUrl}</td>
-                  <td style={{width:"300px", height:"80px"}}>{item.title}{item.desc}</td>
-                  <td style={{width:"100px", height:"80px"}}><input type="number" value={arr[i]} min="0" 
-                  onChange={(e)=>{let copy = [...arr]; copy[i]=e.target.value; setArr(copy)}} 
-                  style={{width:"44px", height:"26px"}}/></td>
-                  <td style={{width:"100px", height:"80px"}}>{item.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</td>
-                  <td style={{width:"100px", height:"80px"}}>무료</td>
-                  <td style={{width:"100px", height:"80px"}}>{(Number(item.cost)*Number(arr[i])).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</td>
-                  <td style={{width:"100px", height:"80px"}}>
-                  <button style={{backgroundColor:"black", color:"white", border:"1.5px solid black"}}>주문하기</button>
-                  <br />
-                  <button style={{backgroundColor:"white", color:"gray", border:"1.5px solid gray"}}>삭제</button>
+                  {/* 체크박스 */}
+                  <th scope="row">
+                    <input type="checkbox" id={item.id} />
+                  </th>
+                  
+                  {/* 이미지 */}
+                  <td>
+                    <img alt='' src={item.imgUrl} style={{width:"80px", height:"80px"}}/>
+                  </td>
+                  
+                  {/* 상품정보 */}
+                  <td style={{width:"300px", height:"80px"}}>
+                    {item.title}{item.desc}
+                  </td>
+                  
+                  {/* 수량 */}
+                  <td>
+                    <input type="number" value={arr[i]} min="0" 
+                      onChange={(e)=>{
+                      let copy = [...arr]; 
+                      copy[i]=e.target.value; 
+                      setArr(copy)}} 
+                      style={{width:"44px", height:"26px"}}/>
+                  </td>
+                  
+                  {/* 판매가 */}
+                  <td >
+                    {item.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원
+                  </td>
+                  
+                  {/* 배송비 */}
+                  <td >무료</td>
+                  
+                  {/* 합계 */}
+                  <td >
+                    {(Number(item.cost)*Number(arr[i])).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원
+                  </td>
+                  
+                  {/* 선택 */}
+                  <td >
+                    <button 
+                    style={{backgroundColor:"black", color:"white", border:"1.5px solid black"}}>
+                      주문하기
+                    </button>
+                    <br />
+                    <button 
+                    style={{backgroundColor:"white", color:"gray", border:"1.5px solid gray"}} 
+                    onClick={()=>{removeItem(item.id)}}>
+                      삭제
+                    </button>
                   </td>
                 </tr>
               );
@@ -118,6 +167,10 @@ const Item2 = styled.div`
       margin: 2px 0;
       line-height: 34px;
       font-size: 16px;
+    }
+    td {
+      width: 100px, 
+      /* height: 80px, */
     }
   }
 `;
