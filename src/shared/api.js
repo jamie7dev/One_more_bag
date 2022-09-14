@@ -12,11 +12,13 @@ instance.interceptors.request.use(     //1. 요청 인터셉터 : 2개의 콜백
         const AccessToken = localStorage.getItem("ACCESS_TOKEN");
         const RefreshToken = localStorage.getItem("REFRESHTOKEN");
         // console.log(token)
-        
-        config.headers.Authorization = token;
-        config.headers.refreshToken = refreshToken;
-        config.headers.Authorization = AccessToken;
-        config.headers.refreshToken = RefreshToken;
+        if (AccessToken === null) {
+            config.headers.Authorization = token;
+            config.headers.refreshToken = refreshToken;
+        } else {
+            config.headers.Authorization = AccessToken;
+            config.headers.refreshToken = RefreshToken;
+        };
         return config;
     }, 
     (error)=> { // 요청 에러 직전 호출됩니다.

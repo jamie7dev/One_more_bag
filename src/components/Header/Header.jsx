@@ -27,6 +27,7 @@ const Header = () => {
   });
   // console.log(accesstoken)
   // console.log(kakaoAccesstoken)
+
   return (
     <>
       <StHeader>
@@ -42,7 +43,42 @@ const Header = () => {
               </label>
             </Label>
             <StUserBtn>
-              { accesstoken || kakaoAccesstoken ?
+              {/* 로그인 하면 마이페이지 보여주고 로그아웃 상태면 로그인 보여주기 */}
+              {/* {  !kakaoAccesstoken ||  accesstoken === undefined ?
+                (
+                <>
+                  <p onClick={()=>navigate('/login')}>LOGIN</p>
+                  <p onClick={()=>navigate('/signup')}>JOIN</p>
+                </>
+                )
+                : String(accesstoken) === "undefined" || accesstoken === undefined ? 
+                (
+                  <>
+                  <p onClick={()=>navigate('/login')}>LOGIN</p>
+                  <p onClick={()=>navigate('/signup')}>JOIN</p>
+                </>
+                )
+                : 
+                (
+                  <>
+                    <p onClick={()=>{
+                      deleteCookie("ACCESS_TOKEN");
+                      deleteCookie("REFRESH_TOKEN");
+                      deleteCookie("isLogin");
+                      setAccess("undefined");
+                      localStorage.removeItem("name");
+                      localStorage.removeItem("REFRESHTOKEN");
+                      localStorage.removeItem("ACCESS_TOKEN");
+                      alert('로그아웃 되었습니다.');
+                      navigate("/");
+                    }}>LOGOUT</p>
+                    <p onClick={()=>navigate('/mypage')}>MY PAGE</p>
+                    <p onClick={()=>navigate('/cart')}>BAG/{mycart?.length}</p>
+                  </>
+                )
+              } */}
+              {
+                accesstoken || kakaoAccesstoken ? 
                 (
                   <>
                     <p onClick={()=>{
@@ -51,9 +87,9 @@ const Header = () => {
                       deleteCookie("isLogin");
                       alert('로그아웃 되었습니다.')
                       setAccess("undefined")
-                      window.localStorage.removeItem("name");
-                      localStorage.removeItem("ACCESS_TOKEN");
+                      localStorage.removeItem("name");
                       localStorage.removeItem("REFRESHTOKEN");
+                      localStorage.removeItem("ACCESS_TOKEN");
                       navigate("/");
                     }}>LOGOUT</p>
                     <p onClick={()=>navigate('/mypage')}>MY PAGE</p>
@@ -62,14 +98,13 @@ const Header = () => {
                 )
                 :
                 (
-                <>
+                  <>
                   <p onClick={()=>navigate('/login')}>LOGIN</p>
                   <p onClick={()=>navigate('/signup')}>JOIN</p>
                 </>
                 )
-                
-              }           
-              </StUserBtn>
+              }
+            </StUserBtn>
             <EngBtn>EN</EngBtn>
         </StHdCategory>        
       </StHeader>

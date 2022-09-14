@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { __getDetailInfo } from '../../redux/modules/detail';
 import { instance } from '../../shared/api';
+import { getCookie } from "../../shared/cookie";
 
 
 const Detail = () => { 
@@ -13,6 +14,7 @@ const Detail = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const {id} = useParams();
+   const logIn = getCookie("ACCESS_TOKEN") || localStorage.getItem("ACCESS_TOKEN")
 
   const detailInfo = useSelector((state)=> state.detail.detailInfo);
   // detailInfo에는 id가 없음
@@ -23,6 +25,9 @@ const Detail = () => {
   }, []);
   
   const addBag = async() =>{
+    if (!logIn) {
+      return alert('회원만 가능한 기능입니다.')
+    }
     let a = await instance.post(`api/member/cart/${id}`);
     console.log(a)
     navigate("/cart")
