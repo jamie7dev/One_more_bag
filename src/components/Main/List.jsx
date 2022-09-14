@@ -19,6 +19,7 @@ const List = () => {
     dispatch(_getPosts(page));
   }, [page]);
   
+  
 
   return (
     <>
@@ -88,6 +89,7 @@ const List = () => {
     </>
   );
 
+
   
 };
 const Color = () => {
@@ -130,8 +132,12 @@ const Color = () => {
 //   )
 // }
 
+
+
 export default List;
 
+
+//styled components
 const Stbody = styled.div`
   max-width: 1380px;
   min-width: 1140px;
@@ -202,12 +208,13 @@ const Stfilter = styled.div`
 `
 const StList = styled.div`
   /* width: 100vw; */
-  height: 100vh;
+  /* height: 100vh; */
   margin: 10px 0;
   
   display: grid;
   grid-template-columns: repeat(6, 40%);
-  grid-template-rows: repeat(5, 30%);
+  /* grid-template-rows: repeat(5, 30%); */
+  grid-auto-rows: minmax(auto);
   grid-gap: 7px;
   z-index: 1;
   .item {
