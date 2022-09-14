@@ -8,6 +8,7 @@ import { instance } from '../../shared/api';
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state)=>state.cart)
+  // const [count, setCount] = useState(0); 
 
   useEffect(()=>{
     dispatch(__getCart());
@@ -17,10 +18,12 @@ const Cart = () => {
   let [arr, setArr] = useState(new Array(cart?.cart?.length).fill(0));
   
   const removeItem = async(id) => {
-    let a = await instance.delete(`api/member/cart`, {postId:[id]});
+    let a = await instance.delete(`api/member/cart`, {data:{postId:[id]}});
     console.log(a)
+    
   }
-  console.log(cart)
+
+  
 
   return (
       <Container>
@@ -44,20 +47,20 @@ const Cart = () => {
           <tbody>
             {cart?.cart?.map((item, i)=>{
               return (
-                <tr style={{textAlign:"center"}} key={item.id}>
-                  <th scope="row"><input type="checkbox" id={item.id} /></th>
-                  <td><img src={item.imgUrl} style={{width:"80px", height:"80px"}}/></td>
-                  <td style={{width:"300px", height:"80px"}}>{item.title}{item.desc}</td>
-                  <td style={{width:"100px", height:"80px"}}><input type="number" value={arr[i]} min="0" 
+                <tr style={{textAlign:"center"}} key={item?.id}>
+                  <th scope="row"><input type="checkbox" id={item?.id} /></th>
+                  <td><img src={item?.imgUrl} style={{width:"80px", height:"80px"}}/></td>
+                  <td style={{width:"300px", height:"80px"}}>{item?.title}{item?.desc}</td>
+                  <td style={{width:"100px", height:"80px"}}><input type="number" value={arr[i]|| ''} min="0" 
                   onChange={(e)=>{let copy = [...arr]; copy[i]=e.target.value; setArr(copy)}} 
                   style={{width:"44px", height:"26px"}}/></td>
-                  <td style={{width:"100px", height:"80px"}}>{item.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</td>
+                  <td style={{width:"100px", height:"80px"}}>{item?.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</td>
                   <td style={{width:"100px", height:"80px"}}>무료</td>
-                  <td style={{width:"100px", height:"80px"}}>{(Number(item.cost)*Number(arr[i])).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</td>
+                  <td style={{width:"100px", height:"80px"}}>{(Number(item?.cost)*Number(arr[i])).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</td>
                   <td style={{width:"100px", height:"80px"}}>
                   <button style={{backgroundColor:"black", color:"white", border:"1.5px solid black"}}>주문하기</button>
                   <br />
-                  <button style={{backgroundColor:"white", color:"gray", border:"1.5px solid gray"}} onClick={()=>{removeItem(item.id)}}>삭제</button>
+                  <button style={{backgroundColor:"white", color:"gray", border:"1.5px solid gray"}} onClick={()=>{removeItem(item?.id)}}>삭제</button>
                   </td>
                 </tr>
               );

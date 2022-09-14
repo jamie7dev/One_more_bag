@@ -16,7 +16,7 @@ export const __getCart = createAsyncThunk(
   );
 
   export const cart = createSlice({
-    name:"detail", 
+    name:"cart", 
     initialState:{
         cart:[],
         success: false,

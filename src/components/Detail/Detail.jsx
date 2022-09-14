@@ -10,7 +10,7 @@ import { instance } from '../../shared/api';
 
 const Detail = () => { 
   // const [show, setShow] = useState(false);
-  const dispatech = useDispatch()
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const {id} = useParams();
 
@@ -19,7 +19,7 @@ const Detail = () => {
   // console.log(detailInfo);
 
   useEffect(()=> {
-    dispatech(__getDetailInfo(id));
+    dispatch(__getDetailInfo(id));
   }, []);
   
   const addBag = async() =>{
@@ -105,6 +105,7 @@ const Detail = () => {
 
 
 export default Detail;
+
 
 const Container = styled.div`
   display: flex;
