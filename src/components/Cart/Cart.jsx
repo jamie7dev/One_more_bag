@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { __getCart, changeCount } from '../../redux/modules/cart';
+import { __getCart, __deleteCartItem, changeCount, __deleteAll } from '../../redux/modules/cart';
 import { instance } from '../../shared/api';
+import {__deleteCartItem, __deleteAll} from '../../redux/modules/cart';
 import {__deleteCartItem, __deleteAll} from '../../redux/modules/cart';
 
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state)=>state.cart);
-  const myCartItemList = cart?.cart;
-  const IdListofMyCartItems = myCartItemList.map((item)=> {return item?.id});
+  const IdListofMyCartItems = cart?.cart?.map((item)=> {return item?.id});
   // console.log(IdListofMyCartItems);
   // let [arr, setArr] = useState(new Array(cart?.cart?.length).fill(1));
 
@@ -92,10 +92,14 @@ const Cart = () => {
                   </td>
                   
                   {/* 수량 */}
-                  <td style={{width:"100px", height:"80px"}}>
-                    <input type="number" value={item.cnt} min="0" 
-                  onChange={(e)=>{dispatch(changeCount({id:item.id, count:e.target.value}))}} 
-                  style={{width:"44px", height:"26px"}}/></td>
+                  <td>
+                    <input 
+                      type="number"
+                      min="0"
+                      value={item.cnt} 
+                      onChange={(e)=>{dispatch(changeCount({id:item.id, count:e.target.value}))}} 
+                      style={{width:"44px", height:"26px"}}/>
+                  </td>
                   
                   {/* 판매가 */}
                   <td >
@@ -133,7 +137,7 @@ const Cart = () => {
           <button>삭제하기</button>
         </Rmv1>
         <Rmv2>
-        <button onClick={removeAllItem}>장바구니 비우기</button>
+          <button onClick={removeAllItem}>장바구니 비우기</button>
         </Rmv2>
       </Container>
   );
