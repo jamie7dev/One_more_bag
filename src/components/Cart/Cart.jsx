@@ -32,7 +32,7 @@ const Cart = () => {
   const [IdList, setIdList] = useState([])
   useEffect(() => {
     setIdList(cart?.cart?.map((item => {return item?.id})))
-  })
+  }, []);
 
   // 체크박스 전체 선택
   const onChangeAll = (e) => {
