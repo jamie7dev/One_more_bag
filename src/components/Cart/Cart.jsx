@@ -26,6 +26,8 @@ const Cart = () => {
     dispatch(__deleteAll({data:{postId:[...IdListofMyCartItems]}}));
   };
 
+  
+
   return (
       <Container>
         <Item1>
