@@ -38,9 +38,15 @@ const Cart = () => {
   //checkbox
   const [CheckList, setCheckList] = useState([])
   const [IdList, setIdList] = useState([])
+
+  useEffect(() => {
+    setIdList(cart?.cart?.map((item => {return item?.id})))
+  }, []);
+  
   const [check, setCheck] = useState(0);
   const [arr, setArr] = useState([]);
  
+
   // 체크박스 전체 선택
   const onChangeAll = (e) => {
     // 체크할 시 CheckList에 id 값 전체 넣기, 체크 해제할 시 CheckList에 빈 배열 넣기
