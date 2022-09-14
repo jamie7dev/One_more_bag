@@ -7,6 +7,7 @@ export const __getMypageInfo = createAsyncThunk(
     async (payload, thunkAPI) => {
       try {
         const data = await instance.get('api/member/mypage');
+        // console.log(data);
         return thunkAPI.fulfillWithValue(data.data.data);
       } catch (error) {
         return thunkAPI.rejectWithValue(error);
@@ -18,9 +19,9 @@ export const __updateUserInfo = createAsyncThunk(
 "mypage/__updateUserInfo",
 async (payload, thunkAPI) => {
     try {
-    console.log(payload);
+    // console.log(payload);
     const data =  await instance.post("api/member/mypage", payload);
-    console.log(data);
+    // console.log(data);
     if (data.data.success === true) {
     alert('회원정보가 수정되었습니다.');
     };
