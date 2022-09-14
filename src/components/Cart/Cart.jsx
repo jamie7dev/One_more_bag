@@ -7,8 +7,8 @@ import { instance } from '../../shared/api';
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const cart = useSelector((state)=>state.cart);
-  const [count, setCount] = useState(0);
+  const cart = useSelector((state)=>state.cart)
+  // const [count, setCount] = useState(0); 
 
   useEffect(()=>{
     dispatch(__getCart());

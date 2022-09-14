@@ -106,6 +106,7 @@ const Detail = () => {
 
 export default Detail;
 
+
 const Container = styled.div`
   display: flex;
   margin: 0 auto;
@@ -181,16 +182,14 @@ const DtDesc = styled.div`
     font-size: 13px;
     font-weight: lighter;
     color: #555555;
-    
     padding-top: 15px;
   }
   p {
-    width: 30%;
+    width: 100%;
     position: absolute;
     left: 120px;
     font-size: 13px;
-    line-height: 34px;
-    padding-top: 5px;
+    padding-top: 12px;
   }
   select {
     width: 400px;

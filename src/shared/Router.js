@@ -19,7 +19,7 @@ const Router = () => {
         <Route path='mypage' element={<Mypage />}/>
         <Route path='detail/:id' element={<DetailPage />}/>
         <Route path='cart' element={<CartPage />}/>
-        <Route path='/auth/kakao/callback' element={<KaKao />} />
+        <Route path='/kakao' element={<KaKao />} />
       </Routes>
     </BrowserRouter>
   );

@@ -25,7 +25,8 @@ const Header = () => {
     setAccess(getCookie("ACCESS_TOKEN"));
     setKakaoAccess(localStorage.getItem("ACCESS_TOKEN"));
   });
-
+  // console.log(accesstoken)
+  // console.log(kakaoAccesstoken)
   return (
     <>
       <StHeader>
@@ -43,10 +44,10 @@ const Header = () => {
             <StUserBtn>
               {/* 로그인 하면 마이페이지 보여주고 로그아웃 상태면 로그인 보여주기 */}
               {
-                accesstoken === "undefined" || accesstoken === undefined || kakaoAccesstoken === "undefined" || kakaoAccesstoken === undefined ?
+                accesstoken === "undefined" || accesstoken === undefined || !kakaoAccesstoken ?
                 (
                   <>
-                  <p onClick={()=>{navigate('/login')}}>LOGIN</p>
+                  <p onClick={()=>navigate('/login')}>LOGIN</p>
                   <p onClick={()=>navigate('/signup')}>JOIN</p>
                 </>
                 )
@@ -89,6 +90,7 @@ const StHeader = styled.div`
   top: 18px;
 `
 const StHdCategory = styled.div`
+  /* background-color: green; */
   /* position: absolute; */
   display: flex;
   /* align-items: center; */
