@@ -10,6 +10,7 @@ const MypageComponent = () => {
   const dispatch = useDispatch();
   // const logIn = getCookie("ACCESS_TOKEN");
   const mypageInfo = useSelector((state) => state.mypage.mypageInfo);
+  // console.log(mypageInfo);
   const initialState = {
     name: '',
     address: '',
@@ -17,7 +18,7 @@ const MypageComponent = () => {
   };
   const [isEditMode,setIsEditMote] = useState(false); 
   const [newInfo, setNewinfo] = useState(initialState);
-  console.log(newInfo);
+  // console.log(newInfo);
   
   useEffect(()=> {
     dispatch(__getMypageInfo());
