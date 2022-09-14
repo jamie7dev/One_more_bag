@@ -1,14 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { instance } from "../../shared/api";
 import { setCookie } from "../../shared/cookie";
-// import axios from 'axios'
+import axios from 'axios'
 
 
 export const _getMembersEmail = createAsyncThunk(
   'members/_getMembersEmail',
   async (payload, thunkAPI) => {
     try {
-      const data = await instance.get('api/member/signup');
+      const data = await axios.get('http://43.201.34.71:8080/api/member/signup');
       // console.log(data.data.data);
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
@@ -71,7 +71,7 @@ extraReducers: (builder) => {
     })
     .addCase(_getMembersEmail.fulfilled, (state, action) => {
     state.isLoading = false; 
-    state.usersEmail = action.payload; 
+    state.membersEmail = action.payload; 
     })
     .addCase(_getMembersEmail.rejected, (state, action) => {
     state.isLoading = false; 
