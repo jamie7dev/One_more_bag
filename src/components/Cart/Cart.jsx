@@ -3,9 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { __getCart, __deleteCartItem, changeCount, __deleteAll } from '../../redux/modules/cart';
-import { instance } from '../../shared/api';
-import {__deleteCartItem, __deleteAll} from '../../redux/modules/cart';
-import {__deleteCartItem, __deleteAll} from '../../redux/modules/cart';
+// import { instance } from '../../shared/api';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -13,10 +11,11 @@ const Cart = () => {
   const IdListofMyCartItems = cart?.cart?.map((item)=> {return item?.id});
   // console.log(IdListofMyCartItems);
   // let [arr, setArr] = useState(new Array(cart?.cart?.length).fill(1));
+  
 
   useEffect(()=>{
     dispatch(__getCart());
-  },[dispatch, cart.cart.length]);
+  },[dispatch, cart?.cart?.length]);
   // console.log(cart.cart);
 
   const removeItem = (id) => {
@@ -28,7 +27,28 @@ const Cart = () => {
     dispatch(__deleteAll({data:{postId:[...IdListofMyCartItems]}}));
   };
 
-  
+  //////////////////////////////////////////////
+  const [CheckList, setCheckList] = useState([])
+  const [IdList, setIdList] = useState([])
+  useEffect(() => {
+    setIdList(cart?.cart?.map((item => {return item?.id})))
+  })
+
+  // 체크박스 전체 선택
+  const onChangeAll = (e) => {
+    // 체크할 시 CheckList에 id 값 전체 넣기, 체크 해제할 시 CheckList에 빈 배열 넣기
+    setCheckList(e.target.checked ? IdList : [])
+ }
+
+ const onChangeEach = (e, id) => {
+  // 체크할 시 CheckList에 id값 넣기
+  if (e.target.checked) {
+     setCheckList([...CheckList, id]);
+  // 체크 해제할 시 CheckList에서 해당 id값이 `아닌` 값만 배열에 넣기
+  } else {
+     setCheckList(CheckList.filter((checkedId) => checkedId !== id));
+  }
+}
 
   
 
@@ -41,7 +61,8 @@ const Cart = () => {
         <table className="table table-borderless">
           <thead style={{textAlign:"center"}}>
             <tr>
-              <th scope="col" ><input type="checkbox" id="checkall" /></th>
+              <th scope="col" ><input type="checkbox" id="checkall" 
+              onChange={onChangeAll} checked={CheckList.length === IdList.length}/></th>
               <th scope="col" style={{width:"80px", fontWeight:"normal"}}>이미지</th>
               <th scope="col" style={{width:"300px", fontWeight:"normal"}}>상품정보</th>
               <th scope="col" style={{width:"100px", fontWeight:"normal"}}>수량</th>
@@ -52,33 +73,14 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
-          {/* {cart?.cart?.map((item, i)=>{
-              return (
-                <tr style={{textAlign:"center"}} key={item.id}>
-                  <th scope="row"><input type="checkbox" id={item.id} /></th>
-                  <td><img src={item.imgUrl} style={{width:"80px", height:"80px"}}/></td>
-                  <td style={{width:"300px", height:"80px"}}>{item.title}{item.desc}</td>
-                  <td style={{width:"100px", height:"80px"}}><input type="number" value={item.cnt} min="0" 
-                  onChange={(e)=>{dispatch(changeCount({id:item.id, count:e.target.value}))}} 
-                  style={{width:"44px", height:"26px"}}/></td>
-                  <td style={{width:"100px", height:"80px"}}>{item.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</td>
-                  <td style={{width:"100px", height:"80px"}}>무료</td>
-                  <td style={{width:"100px", height:"80px"}}>{(Number(item.cost)*Number(item.cnt)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</td>
-                  <td style={{width:"100px", height:"80px"}}>
-                  <button style={{backgroundColor:"black", color:"white", border:"1.5px solid black"}}>주문하기</button>
-                  <br />
-                  <button style={{backgroundColor:"white", color:"gray", border:"1.5px solid gray"}} onClick={()=>{removeItem(item.id)}}>삭제</button>
-                  </td>
-                </tr>
-              );
-            })} */}
 
             {cart?.cart?.map((item, i)=>{
               return (
                 <tr style={{textAlign:"center"}} key={item.id}>
                   {/* 체크박스 */}
                   <th scope="row">
-                    <input type="checkbox" id={item.id} />
+                    <input type="checkbox" id={item.id} 
+                    onChange={(e) => onChangeEach(e, item.id)} checked={CheckList.includes(item.id)}/>
                   </th>
                   
                   {/* 이미지 */}
