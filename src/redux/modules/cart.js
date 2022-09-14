@@ -15,6 +15,37 @@ export const __getCart = createAsyncThunk(
   }
 );
 
+export const __deleteCartItem = createAsyncThunk(
+  "cart/__deleteCartItem",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await instance.delete('api/member/cart', payload);
+      return console.log(data);
+      // return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.code);
+    }
+  }
+);
+
+export const __deleteAll = createAsyncThunk(
+  "cart/__deleteAll",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await instance.delete('api/member/cart/deleteAll', payload);
+      if ( data.data.success === true) {
+        alert('장바구니를 비웠습니다.');
+        window.location.reload();
+      }
+      return console.log(data.data);
+      // return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.code);
+    }
+  }
+);
+
+
 export const cart = createSlice({
   name: 'cart',
   initialState: {
@@ -23,7 +54,12 @@ export const cart = createSlice({
     error: null,
     isLoading: false,
   },
-  reducers: {},
+  reducers: {
+    changeCount(state,action){
+      let index = state.cart.findIndex((cart)=> cart.id === action.payload.id)
+      state.cart.splice(index,1,{...state.cart[index],cnt:action.payload.count})
+    }
+  },
 
   extraReducers: (builder) => {
     builder
@@ -41,4 +77,5 @@ export const cart = createSlice({
   },
 });
 
+export let {changeCount} = cart.actions;
 export default cart.reducer;

@@ -2,28 +2,33 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { __getCart } from '../../redux/modules/cart';
+import { __getCart, changeCount } from '../../redux/modules/cart';
 import { instance } from '../../shared/api';
+import {__deleteCartItem, __deleteAll} from '../../redux/modules/cart';
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const cart = useSelector((state)=>state.cart)
-  // const [count, setCount] = useState(0); 
+  const cart = useSelector((state)=>state.cart);
+  const myCartItemList = cart?.cart;
+  const IdListofMyCartItems = myCartItemList.map((item)=> {return item?.id});
+  // console.log(IdListofMyCartItems);
+  // let [arr, setArr] = useState(new Array(cart?.cart?.length).fill(1));
 
   useEffect(()=>{
     dispatch(__getCart());
-  },[dispatch])
+  },[dispatch, cart.cart.length]);
+  // console.log(cart.cart);
 
-  let [arr, setArr] = useState(new Array(cart?.cart?.length).fill(1));
-  
-  const removeItem = async(id) => {
-    try {
-      let response = await instance.delete('api/member/cart', {data:{postId:[id]}});
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
+  const removeItem = (id) => {
+    dispatch(__deleteCartItem({data:{postId:[id]}}));
+    window.location.reload();
   };
+
+  const removeAllItem = () => {
+    dispatch(__deleteAll({data:{postId:[...IdListofMyCartItems]}}));
+  };
+
+  
 
   
 
@@ -47,6 +52,27 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
+          {/* {cart?.cart?.map((item, i)=>{
+              return (
+                <tr style={{textAlign:"center"}} key={item.id}>
+                  <th scope="row"><input type="checkbox" id={item.id} /></th>
+                  <td><img src={item.imgUrl} style={{width:"80px", height:"80px"}}/></td>
+                  <td style={{width:"300px", height:"80px"}}>{item.title}{item.desc}</td>
+                  <td style={{width:"100px", height:"80px"}}><input type="number" value={item.cnt} min="0" 
+                  onChange={(e)=>{dispatch(changeCount({id:item.id, count:e.target.value}))}} 
+                  style={{width:"44px", height:"26px"}}/></td>
+                  <td style={{width:"100px", height:"80px"}}>{item.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</td>
+                  <td style={{width:"100px", height:"80px"}}>무료</td>
+                  <td style={{width:"100px", height:"80px"}}>{(Number(item.cost)*Number(item.cnt)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</td>
+                  <td style={{width:"100px", height:"80px"}}>
+                  <button style={{backgroundColor:"black", color:"white", border:"1.5px solid black"}}>주문하기</button>
+                  <br />
+                  <button style={{backgroundColor:"white", color:"gray", border:"1.5px solid gray"}} onClick={()=>{removeItem(item.id)}}>삭제</button>
+                  </td>
+                </tr>
+              );
+            })} */}
+
             {cart?.cart?.map((item, i)=>{
               return (
                 <tr style={{textAlign:"center"}} key={item.id}>
@@ -66,14 +92,10 @@ const Cart = () => {
                   </td>
                   
                   {/* 수량 */}
-                  <td>
-                    <input type="number" value={arr[i]} min="0" 
-                      onChange={(e)=>{
-                      let copy = [...arr]; 
-                      copy[i]=e.target.value; 
-                      setArr(copy)}} 
-                      style={{width:"44px", height:"26px"}}/>
-                  </td>
+                  <td style={{width:"100px", height:"80px"}}>
+                    <input type="number" value={item.cnt} min="0" 
+                  onChange={(e)=>{dispatch(changeCount({id:item.id, count:e.target.value}))}} 
+                  style={{width:"44px", height:"26px"}}/></td>
                   
                   {/* 판매가 */}
                   <td >
@@ -85,7 +107,7 @@ const Cart = () => {
                   
                   {/* 합계 */}
                   <td >
-                    {(Number(item.cost)*Number(arr[i])).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원
+                    {(Number(item.cost)*Number(item.cnt)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원
                   </td>
                   
                   {/* 선택 */}
@@ -111,7 +133,7 @@ const Cart = () => {
           <button>삭제하기</button>
         </Rmv1>
         <Rmv2>
-          <button>장바구니 비우기</button>
+        <button onClick={removeAllItem}>장바구니 비우기</button>
         </Rmv2>
       </Container>
   );
