@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { __getCart, __deleteCartItem, changeCount, __deleteAll } from '../../redux/modules/cart';
 import { instance } from '../../shared/api';
 import {__deleteCartItem, __deleteAll} from '../../redux/modules/cart';
+import {__deleteCartItem, __deleteAll} from '../../redux/modules/cart';
 
 const Cart = () => {
   const dispatch = useDispatch();
