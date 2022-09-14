@@ -42,16 +42,7 @@ const Header = () => {
               </label>
             </Label>
             <StUserBtn>
-              {/* 로그인 하면 마이페이지 보여주고 로그아웃 상태면 로그인 보여주기 */}
-              {
-                accesstoken === "undefined" || accesstoken === undefined || !kakaoAccesstoken ?
-                (
-                  <>
-                  <p onClick={()=>navigate('/login')}>LOGIN</p>
-                  <p onClick={()=>navigate('/signup')}>JOIN</p>
-                </>
-                )
-                :
+              { accesstoken || kakaoAccesstoken ?
                 (
                   <>
                     <p onClick={()=>{
@@ -61,14 +52,24 @@ const Header = () => {
                       alert('로그아웃 되었습니다.')
                       setAccess("undefined")
                       window.localStorage.removeItem("name");
+                      localStorage.removeItem("ACCESS_TOKEN");
+                      localStorage.removeItem("REFRESHTOKEN");
                       navigate("/");
                     }}>LOGOUT</p>
                     <p onClick={()=>navigate('/mypage')}>MY PAGE</p>
                     <p onClick={()=>navigate('/cart')}>BAG/{mycart?.length}</p>
                   </>
                 )
-              }
-            </StUserBtn>
+                :
+                (
+                <>
+                  <p onClick={()=>navigate('/login')}>LOGIN</p>
+                  <p onClick={()=>navigate('/signup')}>JOIN</p>
+                </>
+                )
+                
+              }           
+              </StUserBtn>
             <EngBtn>EN</EngBtn>
         </StHdCategory>        
       </StHeader>

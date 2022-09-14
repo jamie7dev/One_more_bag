@@ -12,7 +12,7 @@ const Cart = () => {
 
   useEffect(()=>{
     dispatch(__getCart());
-  },[dispatch, cart.cart.length])
+  },[dispatch])
 
   let [arr, setArr] = useState(new Array(cart?.cart?.length).fill(1));
   
@@ -24,6 +24,8 @@ const Cart = () => {
       console.log(error);
     }
   };
+
+  
 
   return (
       <Container>
