@@ -39,25 +39,6 @@ export const __memberLogin = createAsyncThunk(
   }
 );
 
-//카카오 로그인
-// export const kakaologin = createAsyncThunk(
-//   'members/kakaoLogin',
-//   async (code, thunkAPI) => {
-//       try {
-//           const res = await instance.get(`api/member/kakao?code=${code}`)   //백엔드로 인가코드 보내기
-          
-//           localStorage.setItem("ACCESS_TOKEN", res.headers.authorization);
-//           localStorage.setItem("REFRESHTOKEN", res.headers.refreshtoken);
-//           console.log(res);
-//           alert('로그인 되었습니다.');
-//           return thunkAPI.fulfillWithValue(res.data);                    
-                    
-//         } catch (error) {
-//           console.log("카카오 로그인 실패")
-//           return thunkAPI.rejectWithValue(error);
-//       }
-//   }
-// );
 
 
   

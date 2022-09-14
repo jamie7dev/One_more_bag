@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { __getCart } from '../../redux/modules/cart';
+import { instance } from '../../shared/api';
 
 const Cart = () => {
-  const [count, setCount] = useState(0);
+  const dispatch = useDispatch();
+  const cart = useSelector((state)=>state.cart)
+  // const [count, setCount] = useState(0); 
 
-  const item = {
-    data: [
-      {id:"", imgUrl:"", title:"", desc:"", cost:""},
-      {id:"1", imgUrl:"이미지", title:"[인더비기닝]", desc:"fogni round pouch", cost:"18000"}
-    ]
+  useEffect(()=>{
+    dispatch(__getCart());
+  },[dispatch])
+
+  
+  let [arr, setArr] = useState(new Array(cart?.cart?.length).fill(0));
+  
+  const removeItem = async(id) => {
+    let a = await instance.delete(`api/member/cart`, {data:{postId:[id]}});
+    console.log(a)
+    
   }
-  let [arr, setArr] = useState(new Array(item.data.length).fill(0));
+
   
 
   return (
@@ -33,22 +45,22 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
-            {item.data.map((item, i)=>{
+            {cart?.cart?.map((item, i)=>{
               return (
-                <tr style={{textAlign:"center"}} key={item.id}>
-                  <th scope="row"><input type="checkbox" id={item.id} /></th>
-                  <td style={{width:"80px", height:"80px"}}>{item.imgUrl}</td>
-                  <td style={{width:"300px", height:"80px"}}>{item.title}{item.desc}</td>
-                  <td style={{width:"100px", height:"80px"}}><input type="number" value={arr[i]} min="0" 
+                <tr style={{textAlign:"center"}} key={item?.id}>
+                  <th scope="row"><input type="checkbox" id={item?.id} /></th>
+                  <td><img src={item?.imgUrl} style={{width:"80px", height:"80px"}}/></td>
+                  <td style={{width:"300px", height:"80px"}}>{item?.title}{item?.desc}</td>
+                  <td style={{width:"100px", height:"80px"}}><input type="number" value={arr[i]|| ''} min="0" 
                   onChange={(e)=>{let copy = [...arr]; copy[i]=e.target.value; setArr(copy)}} 
                   style={{width:"44px", height:"26px"}}/></td>
-                  <td style={{width:"100px", height:"80px"}}>{item.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</td>
+                  <td style={{width:"100px", height:"80px"}}>{item?.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</td>
                   <td style={{width:"100px", height:"80px"}}>무료</td>
-                  <td style={{width:"100px", height:"80px"}}>{(Number(item.cost)*Number(arr[i])).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</td>
+                  <td style={{width:"100px", height:"80px"}}>{(Number(item?.cost)*Number(arr[i])).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</td>
                   <td style={{width:"100px", height:"80px"}}>
                   <button style={{backgroundColor:"black", color:"white", border:"1.5px solid black"}}>주문하기</button>
                   <br />
-                  <button style={{backgroundColor:"white", color:"gray", border:"1.5px solid gray"}}>삭제</button>
+                  <button style={{backgroundColor:"white", color:"gray", border:"1.5px solid gray"}} onClick={()=>{removeItem(item?.id)}}>삭제</button>
                   </td>
                 </tr>
               );

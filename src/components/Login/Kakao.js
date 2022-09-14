@@ -1,8 +1,7 @@
 import React from "react";
-// import { useDispatch } from "react-redux";
-// import { actionCreators as userActions} from "../../redux/modules/members";
 import { useNavigate } from "react-router-dom";
 import { instance } from "../../shared/api";
+
 
 
 const KaKao = () => {
@@ -30,7 +29,7 @@ const KaKao = () => {
         }
     }
   
-  return console.log('kakao')
+  return null;
 };
 
 export default KaKao;

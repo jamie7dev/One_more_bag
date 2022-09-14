@@ -5,11 +5,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { __getDetailInfo } from '../../redux/modules/detail';
+import { instance } from '../../shared/api';
 
 
 const Detail = () => { 
   // const [show, setShow] = useState(false);
-  const dispatech = useDispatch()
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const {id} = useParams();
 
@@ -18,9 +19,15 @@ const Detail = () => {
   // console.log(detailInfo);
 
   useEffect(()=> {
-    dispatech(__getDetailInfo(id));
+    dispatch(__getDetailInfo(id));
   }, []);
-
+  
+  const addBag = async() =>{
+    let a = await instance.post(`api/member/cart/${id}`);
+    console.log(a)
+    navigate("/cart")
+  }
+  console.log(detailInfo)
   return(
     <>
       <Container>
@@ -38,7 +45,7 @@ const Detail = () => {
             </Brand>
             <ItemTitle>{detailInfo.title}</ItemTitle>
             <ItemPrice>
-              <p>{detailInfo.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</p>
+              <p>{detailInfo.cost}원</p>
               <img alt='' src ="https://onemorebag.kr/web/upload/icon_201909191819336000.png" width="20px" height="20px" />
             </ItemPrice>
             <DtDesc>
@@ -73,16 +80,18 @@ const Detail = () => {
               </div>              
             </DtDesc>
             
+            
+            
           </RightTop>
           <TotalPrice>
               <p style={{fontSize:"14px", paddingTop:"10px"}}>총 상품금액 :</p>
-              <p style={{fontSize:"20px", paddingTop:"5px"}}>{detailInfo.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</p>              
+              <p style={{fontSize:"20px", paddingTop:"5px"}}>{detailInfo.cost}원</p>              
           </TotalPrice>
           <Bottom>
             
             <div>
               <p>🚚1~3 영업일 이내 출고 🛎5만원 이상 주문 시 무료배송</p>
-              <button type="button" style={{backgroundColor:"white"}} onClick={()=>{navigate('/cart')}}>ADD TO BAG</button>
+              <button type="button" style={{backgroundColor:"white"}} onClick={()=>{addBag()}}>ADD TO BAG</button>
               <button type="button" style={{backgroundColor:"black", color:"white"}} onClick={()=>{alert('아직 구현되지 않은 기능입니다😭')}}>BUY NOW</button>
             </div>
           </Bottom>
@@ -96,6 +105,7 @@ const Detail = () => {
 
 
 export default Detail;
+
 
 const Container = styled.div`
   display: flex;
