@@ -3,24 +3,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { _getPosts } from '../../redux/modules/list';
-// import ReactPaginate from 'react-paginate';
+import Pagination from './Pagination';
 
 const List = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const contents = useSelector((state) => state.list);
-  // console.log(contents?.data);
-
-  const [page, setPage] = useState(1);
+  console.log(contents?.data);
+  const [limit, setLimit] = useState(30); // 페이지당 게시물
+  const [page, setPage] = useState(1); // 현재 페이지 번호
+  const offset = ( page -1 ) * limit; // 첫 게시물 위치
 
   useEffect(()=> {
     dispatch(_getPosts(page));
-  }, []);
+  }, [page]);
   
   
 
   return (
+    <>
     <Stbody>
       <StCategory>
         <p>ALL</p>
@@ -57,11 +59,34 @@ const List = () => {
           </Stfilter>
           </StFunction>        
         <StList>
-           <ItemList contents={contents?.data} navigate={navigate}/>  
+        <StList>
+        {contents?.data?.content?.map((item) => {
+           return <div
+              key={item?.id}
+              style={{ display:"grid" }}
+              onClick={()=>{navigate(`/detail/${item.id}`)}}            
+            >
+            <img 
+            alt='' src={item?.imgUrl} style={{width:'100%',height:'100%', maxWidth:'177px', minWidth:'160px', maxHeight:'177px', minHeight:'159px'}}/>
+            <StBrand>{item?.brand}</StBrand>
+            <div style={{fontSize:'13px', color:'#555555'}}>{item?.title}</div>
+            <div style={{fontSize:'15px'}}>{item?.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</div>
+            </div>
+          })}
+        </StList>
         </StList>       
         </StContainer>
       </StWrap>
     </Stbody>
+    <footer style={{position:"fixed", bottom:"10px", zIndex:"1", left:"30%"}}>
+        <Pagination
+          total={762}
+          limit={limit}
+          page={page}
+          setPage={setPage}
+        />
+      </footer>
+    </>
   );
 
 
@@ -81,31 +106,31 @@ const Color = () => {
   )
 }
 
-const ItemList = ({contents, navigate}) => {
-    // console.log(contents?.content);
-  // const itemList = new Array(30).fill("");
+// const ItemList = ({contents, navigate}) => {
+//     // console.log(contents?.content);
+//   // const itemList = new Array(30).fill("");
 
-  return (
-    <>
-    <StList>
-      {contents?.content?.map((item) => (
-          <div
-            key={item?.id}
-            style={{ display:"grid" }}
-            onClick={()=>{navigate(`/detail/${item.id}`)}}            
-          >
-          <img 
-          alt='' src={item?.imgUrl} style={{width:'100%',height:'100%', maxWidth:'177px', minWidth:'160px', maxHeight:'177px', minHeight:'159px'}}/>
-          <StBrand>{item?.brand}</StBrand>
-          <div style={{fontSize:'13px', color:'#555555'}}>{item?.title}</div>
-          <div style={{fontSize:'15px'}}>{item?.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</div>
-          </div>
-        ))}
-    </StList>
+//   return (
+//     <>
+//     <StList>
+//       {contents?.content?.slice(offset, offset+limit).map((item) => (
+//           <div
+//             key={item?.id}
+//             style={{ display:"grid" }}
+//             onClick={()=>{navigate(`/detail/${item.id}`)}}            
+//           >
+//           <img 
+//           alt='' src={item?.imgUrl} style={{width:'100%',height:'100%', maxWidth:'177px', minWidth:'160px', maxHeight:'177px', minHeight:'159px',}}/>
+//           <StBrand>{item?.brand}</StBrand>
+//           <div style={{fontSize:'13px', color:'#555555'}}>{item?.title}</div>
+//           <div style={{fontSize:'15px'}}>{item?.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</div>
+//           </div>
+//         ))}
+//     </StList>
     
-    </>
-  )
-}
+//     </>
+//   )
+// }
 
 
 
@@ -170,7 +195,7 @@ const Stfilter = styled.div`
   display: flex;
   position: absolute;
   right: 0;
-  width: 300px;
+  width: 340px;
   height: 20px;
   line-height: 10px;
   padding-bottom: 10px;

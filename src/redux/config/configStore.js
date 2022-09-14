@@ -12,7 +12,7 @@ const store = configureStore({
     detail,
     members,
     mypage,
-    cart,
+    cart
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

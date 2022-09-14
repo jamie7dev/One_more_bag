@@ -8,13 +8,14 @@ import { deleteCookie, getCookie } from "../../shared/cookie";
 const Header = () => {
   const navigate = useNavigate();
   const [accesstoken,setAccess] = useState(undefined);
-  const [kakaoAccesstoken, setKakaoAccess] = useState(undefined);
+  const [kakaoAccesstoken,setKakaoAccess] = useState(undefined);
+  const mycart = useSelector((state) => state.cart.cart);
 
   useEffect(()=>{
     let b = setTimeout(()=>{
       setAccess(getCookie("ACCESS_TOKEN"));
       setKakaoAccess(localStorage.getItem("ACCESS_TOKEN"));
-    },1000);
+  },1000);
     return ()=>{
       clearTimeout(b);
     }
@@ -63,7 +64,7 @@ const Header = () => {
                       navigate("/");
                     }}>LOGOUT</p>
                     <p onClick={()=>navigate('/mypage')}>MY PAGE</p>
-                    <p onClick={()=>navigate('/cart')}>BAG</p>
+                    <p onClick={()=>navigate('/cart')}>BAG/{mycart?.length}</p>
                   </>
                 )
               }
