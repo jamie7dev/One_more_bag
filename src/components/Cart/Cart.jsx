@@ -14,6 +14,7 @@ const Cart = () => {
   
 
   useEffect(()=>{
+    setIdList(cart?.cart?.map((item => {return item?.id})))
     dispatch(__getCart());
   },[dispatch, cart?.cart?.length]);
   // console.log(cart.cart);
@@ -27,29 +28,59 @@ const Cart = () => {
     dispatch(__deleteAll({data:{postId:[...IdListofMyCartItems]}}));
   };
 
-  //////////////////////////////////////////////
+  const removeChecked = (id) => {
+    dispatch(__deleteCartItem({data:{postId:id}}));
+    
+  };
+
+
+
+  //checkbox
   const [CheckList, setCheckList] = useState([])
   const [IdList, setIdList] = useState([])
+
   useEffect(() => {
     setIdList(cart?.cart?.map((item => {return item?.id})))
   }, []);
+  
+  const [check, setCheck] = useState(0);
+  const [arr, setArr] = useState([]);
+ 
 
   // 체크박스 전체 선택
   const onChangeAll = (e) => {
     // 체크할 시 CheckList에 id 값 전체 넣기, 체크 해제할 시 CheckList에 빈 배열 넣기
     setCheckList(e.target.checked ? IdList : [])
- }
-
- const onChangeEach = (e, id) => {
-  // 체크할 시 CheckList에 id값 넣기
-  if (e.target.checked) {
-     setCheckList([...CheckList, id]);
-  // 체크 해제할 시 CheckList에서 해당 id값이 `아닌` 값만 배열에 넣기
-  } else {
-     setCheckList(CheckList.filter((checkedId) => checkedId !== id));
   }
-}
 
+  const onChangeEach = (e, id) => {
+    // 체크할 시 CheckList에 id값 넣기
+    if (e.target.checked) {
+      setCheckList([...CheckList, id]);
+    // 체크 해제할 시 CheckList에서 해당 id값이 `아닌` 값만 배열에 넣기
+    } else {
+      setCheckList(CheckList.filter((checkedId) => checkedId !== id));
+    }
+  }
+
+  const countChecked = (e) => {
+    console.log(e.target.value)
+    if(e.target.checked){
+          // 선택한 체크박스를 배열형식으로 저장
+          setArr([...arr,e.target.value])
+      
+    // 체크를 눌렀다가 해제했을 때 동작하는 내용
+    }else{
+        // 배열형식으로 저장된 내용을 수정하는 부분 (체크 해제된 내용을 찾아서 배열에서 제거)
+        let index= arr.findIndex((a) => a === e.target.value)
+        let copy = arr;
+        console.log(copy.splice(index,1))
+    }
+    console.log(arr)
+
+  }
+
+  
   
 
   return (
@@ -79,7 +110,9 @@ const Cart = () => {
                 <tr style={{textAlign:"center"}} key={item.id}>
                   {/* 체크박스 */}
                   <th scope="row">
-                    <input type="checkbox" id={item.id} 
+                    <input type="checkbox"
+                    value={item.id}             
+                    onClick={countChecked}
                     onChange={(e) => onChangeEach(e, item.id)} checked={CheckList.includes(item.id)}/>
                   </th>
                   
@@ -136,7 +169,7 @@ const Cart = () => {
         </table>
         </Item2>
         <Rmv1>
-          <button>삭제하기</button>
+          <button onClick={()=>{removeChecked(arr)}}>삭제하기</button>
         </Rmv1>
         <Rmv2>
           <button onClick={removeAllItem}>장바구니 비우기</button>
