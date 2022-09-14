@@ -29,10 +29,10 @@ const Detail = () => {
       return alert('회원만 가능한 기능입니다.')
     }
     let a = await instance.post(`api/member/cart/${id}`);
-    console.log(a)
+    // console.log(a)
     navigate("/cart")
   }
-  console.log(detailInfo)
+  // console.log(detailInfo)
   return(
     <>
       <Container>

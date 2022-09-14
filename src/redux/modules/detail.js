@@ -7,7 +7,7 @@ export const __getDetailInfo = createAsyncThunk(
     async (payload, thunkAPI) => {
       try {
         const data = await axios.get(`http://43.201.34.71:8080/api/post/${payload}`);
-        console.log(data.data);
+        // console.log(data.data);
         return thunkAPI.fulfillWithValue(data.data.data);
       } catch (error) {
         return thunkAPI.rejectWithValue(error);

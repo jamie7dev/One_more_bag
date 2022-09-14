@@ -10,7 +10,7 @@ const List = () => {
   const navigate = useNavigate();
 
   const contents = useSelector((state) => state.list);
-  console.log(contents?.data);
+  // console.log(contents?.data);
   const [limit, setLimit] = useState(30); // 페이지당 게시물
   const [page, setPage] = useState(1); // 현재 페이지 번호
   const offset = ( page -1 ) * limit; // 첫 게시물 위치

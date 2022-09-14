@@ -64,7 +64,7 @@ const Cart = () => {
   }
 
   const countChecked = (e) => {
-    console.log(e.target.value)
+    // console.log(e.target.value)
     if(e.target.checked){
           // 선택한 체크박스를 배열형식으로 저장
           setArr([...arr,e.target.value])
@@ -74,9 +74,9 @@ const Cart = () => {
         // 배열형식으로 저장된 내용을 수정하는 부분 (체크 해제된 내용을 찾아서 배열에서 제거)
         let index= arr.findIndex((a) => a === e.target.value)
         let copy = arr;
-        console.log(copy.splice(index,1))
+        // console.log(copy.splice(index,1))
     }
-    console.log(arr)
+    // console.log(arr)
 
   }
 
