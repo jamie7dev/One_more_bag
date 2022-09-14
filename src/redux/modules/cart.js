@@ -60,6 +60,11 @@ export const cart = createSlice({
       let index = state.cart.findIndex((cart)=> cart.id === action.payload.id)
       state.cart.splice(index,1,{...state.cart[index],cnt:action.payload.count})
     }
+  
+    changeCount(state,action){
+      let index = state.cart.findIndex((cart)=> cart.id === action.payload.id)
+      state.cart.splice(index,1,{...state.cart[index],cnt:action.payload.count})
+    }
   },
 
   extraReducers: (builder) => {

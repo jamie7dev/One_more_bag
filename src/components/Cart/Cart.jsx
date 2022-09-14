@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { __getCart, __deleteCartItem, changeCount, __deleteAll } from '../../redux/modules/cart';
 import { instance } from '../../shared/api';
+import {__deleteCartItem, __deleteAll} from '../../redux/modules/cart';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,8 @@ const Cart = () => {
 
   
 
+  
+
   return (
       <Container>
         <Item1>
@@ -48,6 +51,27 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
+          {/* {cart?.cart?.map((item, i)=>{
+              return (
+                <tr style={{textAlign:"center"}} key={item.id}>
+                  <th scope="row"><input type="checkbox" id={item.id} /></th>
+                  <td><img src={item.imgUrl} style={{width:"80px", height:"80px"}}/></td>
+                  <td style={{width:"300px", height:"80px"}}>{item.title}{item.desc}</td>
+                  <td style={{width:"100px", height:"80px"}}><input type="number" value={item.cnt} min="0" 
+                  onChange={(e)=>{dispatch(changeCount({id:item.id, count:e.target.value}))}} 
+                  style={{width:"44px", height:"26px"}}/></td>
+                  <td style={{width:"100px", height:"80px"}}>{item.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</td>
+                  <td style={{width:"100px", height:"80px"}}>무료</td>
+                  <td style={{width:"100px", height:"80px"}}>{(Number(item.cost)*Number(item.cnt)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</td>
+                  <td style={{width:"100px", height:"80px"}}>
+                  <button style={{backgroundColor:"black", color:"white", border:"1.5px solid black"}}>주문하기</button>
+                  <br />
+                  <button style={{backgroundColor:"white", color:"gray", border:"1.5px solid gray"}} onClick={()=>{removeItem(item.id)}}>삭제</button>
+                  </td>
+                </tr>
+              );
+            })} */}
+
             {cart?.cart?.map((item, i)=>{
               return (
                 <tr style={{textAlign:"center"}} key={item.id}>
