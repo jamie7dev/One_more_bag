@@ -65,7 +65,7 @@ const List = () => {
           </StFunction>        
         <StList>
         <StList>
-        {contents?.data?.content?.slice().reverse().map((item) => {
+        {contents?.data?.content?.map((item) => {
            return <div
               key={item?.id}
               style={{ display:"grid" }}
