@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# 프로젝트 이름 : One more bag [쇼핑몰 클론코딩]
+#### 프로젝트 설명 : https://onemorebag.kr/product/list.html?cate_no=45 사이트 클론코딩
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Back Github : [https://github.com/codingshoppingmall8/BE]
 
-## Available Scripts
 
-In the project directory, you can run:
+## 기능 구현 List
 
-### `yarn start`
+1. 회원가입
+    - Email 중복 검사
+    - Email 유효성 검사
+    - PW 및 PW Confirm 유효성 검사
+    - 휴대전화 유효성 검사
+    
+2. 로그인
+    - Email, PW 입력시 공백 유효성 검사
+    - Email, PW 일치 검사
+    - Access Token과 Refresh Token을 Cookie에 저장하고 interceptor 사용
+       모든 페이지에서 로그인 유지
+    - 소셜 로그인 구현(카카오) Token을 localStorage에 저장   
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3. 마이페이지
+    - 회원 정보 수정 (이름, 주소, 휴대전화)
+    
+4. 메인 페이지
+    - 스크롤시 헤더 고정
+    - 상품 카테고리별 정렬
+    - Pagination
+    - 신상품/상품명/낮은가격/높은가격/조회수 정렬
+    
+5. 장바구니
+    - 장바구니에 상품 추가, 개별 삭제
+    - 체크박스 전체 선택, 해제, 선택 삭제
+    - 장바구니 비우기 (목록 전체 삭제)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `yarn test`
+-----------------
+## 아쉬운 점 
+1. 상세페이지에서 뒤로가기를 하면 메인 첫 페이지로 돌아감
+    
+2. 페이지네이션이 페이지마다 다른 개수로 적용되지 않음
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Front) TroubleShooting 
 
-### `yarn build`
+- A component is changing a controlled input to be uncontrolled.
+    원인) input 태그의 value 초기값이 undefined였다가 렌더링 후에 값이 들어와 바뀌면서 발생한 에러
+    해결) input 태그 value에 공백을 줘서 ||'' controlled input의 범주에 포함시켜주면 됨
+        예) value={arr[i]|| ''}
+    
+- 장바구니 목록에서 개별 삭제가 안 됨 400에러
+    원인) payload를 잘못 보냄
+    해결) axios.delete는 data를 body에 담을 때 data:{}로 감싸서 보내줘야 한다고 함.
+      예) Axios.delete(`/posts/${id}`, {data:{posts: posts}})
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## API 명세서
+참고링크 : https://nonchalant-sturgeon-21a.notion.site/8-d8cd94d7525843618ebc766da876d5d0
+# ERD
+![image](https://user-images.githubusercontent.com/104494969/190310287-04f82802-38df-4024-8251-a57dbfb42131.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
