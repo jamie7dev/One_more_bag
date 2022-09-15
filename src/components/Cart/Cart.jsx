@@ -21,7 +21,6 @@ const Cart = () => {
 
   const removeItem = (id) => {
     dispatch(__deleteCartItem({data:{postId:[id]}}));
-    window.location.reload();
   };
 
   const removeAllItem = () => {
