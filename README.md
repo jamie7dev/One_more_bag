@@ -2,7 +2,8 @@
 
 #### 프로젝트 설명 : https://onemorebag.kr/product/list.html?cate_no=45 클론코딩
 ##### 프로젝트 기간: 22/9/9-15
-<img width="1545" alt="스크린샷 2022-09-15 오후 1 09 40" src="https://user-images.githubusercontent.com/104494969/190312142-a3ec9376-fea3-496d-9cc4-a94c0111f953.png">
+<img width="1757" alt="스크린샷 2022-09-15 오후 1 13 38" src="https://user-images.githubusercontent.com/104494969/190312656-94c2cfd5-2dcb-470f-8b94-2a12e3f3ed42.png">
+
 
 ##### BE Github : [https://github.com/codingshoppingmall8/BE]
 
