@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getCookie } from "./cookie";
 
 export const instance = axios.create({ // axios 인스턴스를 생성합니다.
-    baseURL: "http://43.201.34.71:8080",
+    baseURL: process.env.REACT_APP_HOST_PORT,
   });
 
 instance.interceptors.request.use(     //1. 요청 인터셉터 : 2개의 콜백 함수를 받습니다.
