@@ -99,6 +99,24 @@
     해결) axios.delete는 data를 body에 담을 때 data:{}로 감싸서 보내줘야 한다고 함.    
       예) Axios.delete(`/posts/${id}`, {data:{posts: posts}})    
       
+- 회원정보가 없는 회원이 일반로그인을 시도할 시 로그인되며, 쿠키에 토큰이 undefined로 저장되는 문제   
+이로 인해 실제 회원이 아니어도 로그인이 된 것으로 받아들여져 헤더에 조건부 렌더링이 적용되어 로그아웃, 마이페이지, 장바구니 버튼이 보였음   
+  원인) 로그인 버튼을 눌렀을 시 회원인지 확인한 뒤 POST요청을 보내지 않고, input의 입력여부만 확인하고 있었음   
+  해결) 로그인 페이지에서 GET요청으로 회원email을 받아온 뒤, 입력한 이메일과 일치하는 이메일이 없을 경우 로그인을 막아주어 쿠키에 토큰이 undefined로 저장되지 못하게 처리
+    
+- 카카오 로그인 기능 구현을 완료한 시점부터 일반로그인을 시도했을 때 요청헤더에 Authorization과 refreshToken이 null로 들어가며 로그인이 되지 않는 문제   
+원인) api.js 파일에 요청인터셉터 코드를 잘못 작성함. 조건문을 걸지 않아 코드가 순차적으로 읽히며 요청헤더에 없는 토큰을 실어주는 형태가 됨.   
+해결) 요청인터셉터 코드를 if문으로 수정함.   
+일반 로그인은 token을 쿠키에 저장하고, 카카오 로그인은 token을 로컬스토리지에 저장하는데,    
+if문으로 조건을 걸어서 카카오 로그인 시에 필요한 로컬스토리지에 있는 AccessToken이 null일 경우 쿠키에서 가져온 토큰들을 요청헤더에 실어주고,    
+로컬스토리지에 AccessToken이 있을 경우 헤더에 로컬스토리지에서 가져온 토큰들을 보내는 코드를 작성함
+    `if (AccessToken === null) {
+            config.headers.Authorization = token;
+            config.headers.refreshToken = refreshToken;
+        } else {
+            config.headers.Authorization = AccessToken;
+            config.headers.refreshToken = RefreshToken;
+        };`
       
 ## Back) 😡TroubleShooting  
 
