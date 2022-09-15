@@ -8,7 +8,7 @@
 ##### BE Github : [https://github.com/codingshoppingmall8/BE]
 
 #### 팀원
-[FE] 이혜림, 윤채원
+[FE] 이혜림, 윤채원   
 [BE] 이선홍, 신동하, 김하영
 
 ## 기능 구현 List
@@ -33,7 +33,7 @@
     - 상품 카테고리별 정렬
     - Pagination
     - 신상품/상품명/낮은가격/높은가격/조회수 정렬
-    - css(스크롤시 헤더 고정, grid)
+    - css(스크롤시 헤더 고정, grid, 반응형 웹페이지)
     
 5. 장바구니
     - 장바구니에 상품 추가, 개별 삭제
