@@ -12,7 +12,7 @@ const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userEmailList = useSelector((state)=>state.members?.membersEmail);
-  console.log(userEmailList);
+  // console.log(userEmailList);
 
   const initialState = {
     email:'',
@@ -34,8 +34,13 @@ const Signup = () => {
   };
 
   const onSaveBtnHandler = async ()=> {
+    if (member.email === "" || member.name === "" ||
+        member.password === "" || member.passwordConfirm === "" ||
+        member.address === "" || member.phone === "") {
+          alert('모든 항목을 입력하세요.');
+        }
         const {data} = await instance.post("api/member/signup", member);
-        console.log(data);
+        // console.log(data);
         if (data.success) {
           alert('회원가입이 완료되었습니다. 로그인 후 이용바랍니다.');
           navigate('/');
@@ -68,7 +73,6 @@ const Signup = () => {
           <Item2>
             <div>아이디 (이메일 형식) <span style={{color:'#FF6200'}}>*필수</span></div>
             <input 
-            required
             type='email'
             placeholder='onemorebag@naver.com'
             name='email'
@@ -91,7 +95,7 @@ const Signup = () => {
             <p></p>
 
             <div>비밀번호 <span style={{color:'#FF6200'}}>*필수</span></div>
-            <input 
+            <input
             type="password"
             id="password" 
             name="password" 
@@ -112,7 +116,6 @@ const Signup = () => {
 
             <div>비밀번호 확인 <span style={{color:'#FF6200'}}>*필수</span></div>
             <input 
-            required
             type="password"
             id="passwordConfirm" 
             name="passwordConfirm" 
@@ -133,23 +136,20 @@ const Signup = () => {
 
             <div>이름 <span style={{color:'#FF6200'}}>*필수</span></div>
             <input
-            required
             name='name'
             value={member.name}
             onChange={onChangeHandler}
             />
 
             <div>주소 <span style={{color:'#FF6200'}}>*필수</span></div>
-            <input 
-            required
+            <input             
             name='address'
             value={member.address}
             onChange={onChangeHandler}
             />
 
             <div>휴대전화 <span style={{color:'#FF6200'}}>*필수</span></div>
-            <input 
-            required
+            <input            
             name='phone'
             value={member.phone}
             onChange={(e)=> {setMember({...member, phone: e.target.value.replace(/[^0-9]/g, '')})}}
