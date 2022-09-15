@@ -5,6 +5,8 @@
 <img width="1757" alt="스크린샷 2022-09-15 오후 1 13 38" src="https://user-images.githubusercontent.com/104494969/190312656-94c2cfd5-2dcb-470f-8b94-2a12e3f3ed42.png">
 
 FE 서버 배포: http://hyerimawsbucket.s3-website.ap-northeast-2.amazonaws.com/
+##### FE Github : origin[https://github.com/jamie7dev/W7_One_more_bag.git]
+##### FE Github organization - origin2[https://github.com/codingshoppingmall8/FE]
 ##### BE Github : [https://github.com/codingshoppingmall8/BE]
 
 #### 팀원
