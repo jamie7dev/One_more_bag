@@ -3,18 +3,18 @@ import axios from 'axios';
 import { instance } from "../../shared/api";
 
 
-export const _getPosts = createAsyncThunk(
-    'list/_getPosts',
-    async (payload, thunkAPI) => {
-      try {
-        const data = await instance.get(`api/post?page=${payload}`);
-        // console.log(data);
-        return thunkAPI.fulfillWithValue(data.data.data);
-      } catch (error) {
-        return thunkAPI.rejectWithValue(error);
-      }
-    }
-    );
+// export const _getPosts = createAsyncThunk(
+//     'list/_getPosts',
+//     async (payload, thunkAPI) => {
+//       try {
+//         const data = await instance.get(`api/post?page=${payload}`);
+//         // console.log(data);
+//         return thunkAPI.fulfillWithValue(data.data.data);
+//       } catch (error) {
+//         return thunkAPI.rejectWithValue(error);
+//       }
+//     }
+//     );
     
 export const __sortAndCategory = createAsyncThunk(
   'list/__sortAndCategory',
@@ -70,18 +70,18 @@ export const __sortAndCategory = createAsyncThunk(
     
     extraReducers: (builder) => {
     
-        builder  
-        .addCase(_getPosts.pending, (state) => {
-        state.isLoading = true; 
-        })
-        .addCase(_getPosts.fulfilled, (state, action) => {
-        state.isLoading = false; 
-        state.data = action.payload; 
-        })
-        .addCase(_getPosts.rejected, (state, action) => {
-        state.isLoading = false; 
-        state.error = action.payload; 
-        });
+        // builder  
+        // .addCase(_getPosts.pending, (state) => {
+        // state.isLoading = true; 
+        // })
+        // .addCase(_getPosts.fulfilled, (state, action) => {
+        // state.isLoading = false; 
+        // state.data = action.payload; 
+        // })
+        // .addCase(_getPosts.rejected, (state, action) => {
+        // state.isLoading = false; 
+        // state.error = action.payload; 
+        // });
 
         builder  
         .addCase(__sortAndCategory.pending, (state) => {
