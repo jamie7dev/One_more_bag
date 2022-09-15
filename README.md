@@ -5,6 +5,9 @@
 
 ##### Back Github : [https://github.com/codingshoppingmall8/BE]
 
+#### 팀원
+[FE] 이혜림, 윤채원
+[BE] 이선홍, 신동하, 김하영
 
 ## 기능 구현 List
 
@@ -58,6 +61,4 @@
 
 ## API 명세서
 참고링크 : https://nonchalant-sturgeon-21a.notion.site/8-d8cd94d7525843618ebc766da876d5d0
-##### ERD
-![image](https://user-images.githubusercontent.com/104494969/190310287-04f82802-38df-4024-8251-a57dbfb42131.png)
 
