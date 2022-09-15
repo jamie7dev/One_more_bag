@@ -124,6 +124,7 @@ const StHeader = styled.div`
   margin: 0 auto;
   width: 100%;
   top: 18px;
+  z-index: 100;
 `
 const StHdCategory = styled.div`
   /* background-color: green; */
@@ -133,11 +134,11 @@ const StHdCategory = styled.div`
   width: 100%;
   justify-content: space-between;
   font-family: "GillSansMTPro-Book";
-  /* z-index: 0; */
+  
   a, button {
       text-decoration: none;
       color: black;
-      margin: 0px;
+      /* margin: 0px; */
       font-size: 20px;
     }
 `
@@ -154,7 +155,7 @@ const StLogo = styled.p`
 const StHdBtn = styled.p`
   background-color: white;
   border-radius: 50px;
-  padding: 5px 10px;
+  padding: 5px 10px 0 10px;
   font-size: 28px;
   line-height: 40px;
   letter-spacing: 2.5px;

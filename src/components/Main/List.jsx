@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { _getPosts } from '../../redux/modules/list';
+import { _getPosts, __sortAndCategory } from '../../redux/modules/list';
 import Pagination from './Pagination';
 
 const List = () => {
@@ -10,16 +10,21 @@ const List = () => {
   const navigate = useNavigate();
 
   const contents = useSelector((state) => state.list);
-  console.log(contents?.data);
+  // console.log(contents?.data);
   const [limit, setLimit] = useState(30); // 페이지당 게시물
   const [page, setPage] = useState(1); // 현재 페이지 번호
   const offset = ( page -1 ) * limit; // 첫 게시물 위치
 
+  const [cateNo, setCateNo] = useState(0);
+  const [sortNo, setSortNo] = useState(0);
+
   useEffect(()=> {
     dispatch(_getPosts(page));
   }, [page]);
-  
-  
+
+  const onClickSortAndCategory = (cateNo, sortNo) => {
+    dispatch(__sortAndCategory({page:page, sortNo:sortNo, cateNo:cateNo}));
+  };
 
   return (
     <>
@@ -29,12 +34,12 @@ const List = () => {
         <p>💫BEST</p>
         <p>💝SPECIAL</p>
         <p>🎁GIFT</p>
-        <p>BAG</p>
-        <p>ACC</p>
-        <p>STATIONERY</p>
-        <p>DIGITAL</p>
-        <p>DOLL</p>
-        <p>HOME</p>
+        <p onClick={()=>{setCateNo(0); onClickSortAndCategory(cateNo, sortNo)}}>BAG</p>
+        <p onClick={()=>{setCateNo(1); onClickSortAndCategory(cateNo, sortNo)}}>ACC</p>
+        <p onClick={()=>{setCateNo(2); onClickSortAndCategory(cateNo, sortNo)}}>STATIONERY</p>
+        <p onClick={()=>{setCateNo(3); onClickSortAndCategory(cateNo, sortNo)}}>DIGITAL</p>
+        <p onClick={()=>{setCateNo(4); onClickSortAndCategory(cateNo, sortNo)}}>DOLL</p>
+        <p onClick={()=>{setCateNo(5); onClickSortAndCategory(cateNo, sortNo)}}>HOME</p>
         <p>SALE</p>
         <p>COLLABO</p>
         <p>📍BRAND</p>
@@ -49,13 +54,13 @@ const List = () => {
         </StSidebar>
         <StContainer>
           <StFunction>
-          <StTotal>TOTAL 762</StTotal>
+          <StTotal>TOTAL</StTotal>
           <Stfilter>          
-            <p className="total">신상품</p>
-            <p className="total">상품명</p>
-            <p className="total">낮은가격</p>
-            <p className="total">높은가격</p>
-            <p className="total">조회수</p>
+            <p className="total" onClick={()=>{setSortNo(0); onClickSortAndCategory(cateNo, sortNo)}}>신상품</p>
+            <p className="total" onClick={()=>{setSortNo(4); onClickSortAndCategory(cateNo, sortNo)}}>상품명</p>
+            <p className="total" onClick={()=>{setSortNo(2); onClickSortAndCategory(cateNo, sortNo)}}>낮은가격</p>
+            <p className="total" onClick={()=>{setSortNo(3); onClickSortAndCategory(cateNo, sortNo)}}>높은가격</p>
+            <p className="total" onClick={()=>{setSortNo(1); onClickSortAndCategory(cateNo, sortNo)}}>조회수</p>
           </Stfilter>
           </StFunction>        
         <StList>
@@ -87,11 +92,9 @@ const List = () => {
         />
       </footer>
     </>
-  );
-
-
-  
+  );  
 };
+
 const Color = () => {
   const arr = new Array(42).fill("");
   return  (
@@ -204,6 +207,7 @@ const Stfilter = styled.div`
     color: #484850;
     font-size: 14px;
     padding-left: 6%;
+    cursor: pointer;
   }
 `
 const StList = styled.div`

@@ -38,9 +38,15 @@ const Cart = () => {
   //checkbox
   const [CheckList, setCheckList] = useState([])
   const [IdList, setIdList] = useState([])
+
+  useEffect(() => {
+    setIdList(cart?.cart?.map((item => {return item?.id})))
+  }, []);
+  
   const [check, setCheck] = useState(0);
   const [arr, setArr] = useState([]);
  
+
   // 체크박스 전체 선택
   const onChangeAll = (e) => {
     // 체크할 시 CheckList에 id 값 전체 넣기, 체크 해제할 시 CheckList에 빈 배열 넣기
@@ -58,7 +64,7 @@ const Cart = () => {
   }
 
   const countChecked = (e) => {
-    console.log(e.target.value)
+    // console.log(e.target.value)
     if(e.target.checked){
           // 선택한 체크박스를 배열형식으로 저장
           setArr([...arr,e.target.value])
@@ -68,9 +74,9 @@ const Cart = () => {
         // 배열형식으로 저장된 내용을 수정하는 부분 (체크 해제된 내용을 찾아서 배열에서 제거)
         let index= arr.findIndex((a) => a === e.target.value)
         let copy = arr;
-        console.log(copy.splice(index,1))
+        // console.log(copy.splice(index,1))
     }
-    console.log(arr)
+    // console.log(arr)
 
   }
 
