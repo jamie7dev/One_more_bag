@@ -5,6 +5,8 @@
 <img width="1757" alt="스크린샷 2022-09-15 오후 1 13 38" src="https://user-images.githubusercontent.com/104494969/190312656-94c2cfd5-2dcb-470f-8b94-2a12e3f3ed42.png">
 
 FE 서버 배포: http://hyerimawsbucket.s3-website.ap-northeast-2.amazonaws.com/
+##### FE Github : origin[https://github.com/jamie7dev/W7_One_more_bag.git]
+##### FE Github organization - origin2[https://github.com/codingshoppingmall8/FE]
 ##### BE Github : [https://github.com/codingshoppingmall8/BE]
 
 #### 팀원
@@ -44,8 +46,7 @@ FE 서버 배포: http://hyerimawsbucket.s3-website.ap-northeast-2.amazonaws.com
 -----------------
 ## 아쉬운 점 
 1. 상세페이지에서 뒤로가기를 하면 메인 첫 페이지로 돌아감
-2. 카테고리별 페이지네이션이 적용 안 됨
-3. 관리자 페이지
+2. 관리자 페이지
     - 상품 등록
 
 ## Front) TroubleShooting 
