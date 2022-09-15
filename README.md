@@ -64,3 +64,5 @@
 ## API 명세서
 참고링크 : https://nonchalant-sturgeon-21a.notion.site/8-d8cd94d7525843618ebc766da876d5d0
 
+#### ERD
+![image](https://user-images.githubusercontent.com/104494969/190316587-25d8ece9-733b-4a58-b0ea-147d1c45e84b.png)
