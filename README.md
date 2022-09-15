@@ -1,7 +1,7 @@
 # 프로젝트 이름 : One more bag [쇼핑몰 클론코딩]
 
 #### 프로젝트 설명 : https://onemorebag.kr/product/list.html?cate_no=45 클론코딩
-##### 프로젝튼 기간: 22/9/9-15
+##### 프로젝트 기간: 22/9/9-15
 <img width="1545" alt="스크린샷 2022-09-15 오후 1 09 40" src="https://user-images.githubusercontent.com/104494969/190312142-a3ec9376-fea3-496d-9cc4-a94c0111f953.png">
 
 ##### BE Github : [https://github.com/codingshoppingmall8/BE]
