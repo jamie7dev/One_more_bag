@@ -46,8 +46,7 @@ FE 서버 배포: http://hyerimawsbucket.s3-website.ap-northeast-2.amazonaws.com
 -----------------
 ## 아쉬운 점 
 1. 상세페이지에서 뒤로가기를 하면 메인 첫 페이지로 돌아감
-2. 카테고리별 페이지네이션이 적용 안 됨
-3. 관리자 페이지
+2. 관리자 페이지
     - 상품 등록
 
 ## Front) TroubleShooting 
