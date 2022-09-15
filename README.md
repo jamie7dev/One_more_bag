@@ -50,15 +50,15 @@
 
 ## Front) TroubleShooting 
 
-- A component is changing a controlled input to be uncontrolled.
-    원인) input 태그의 value 초기값이 undefined였다가 렌더링 후에 값이 들어와 바뀌면서 발생한 에러
-    해결) input 태그 value에 공백을 줘서 ||'' controlled input의 범주에 포함시켜주면 됨
-        예) value={arr[i]|| ''}
-    
-- 장바구니 목록에서 개별 삭제가 안 됨 400에러
-    원인) payload를 잘못 보냄
-    해결) axios.delete는 data를 body에 담을 때 data:{}로 감싸서 보내줘야 한다고 함.
-      예) Axios.delete(`/posts/${id}`, {data:{posts: posts}})
+- A component is changing a controlled input to be uncontrolled.    
+    원인) input 태그의 value 초기값이 undefined였다가 렌더링 후에 값이 들어와 바뀌면서 발생한 에러    
+    해결) input 태그 value에 공백을 줘서 ||'' controlled input의 범주에 포함시켜주면 됨    
+        예) value={arr[i]|| ''}    
+<br>    
+- 장바구니 목록에서 개별 삭제가 안 됨 400에러    
+    원인) payload를 잘못 보냄    
+    해결) axios.delete는 data를 body에 담을 때 data:{}로 감싸서 보내줘야 한다고 함.    
+      예) Axios.delete(`/posts/${id}`, {data:{posts: posts}})    
 
 
 ## API 명세서
