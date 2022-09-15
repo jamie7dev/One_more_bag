@@ -20,6 +20,10 @@ export const __deleteCartItem = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await instance.delete('api/member/cart', payload);
+      if ( data.data.success === true) {
+        alert('선택된 항목들이 삭제되었습니다.');
+        window.location.reload();
+      }
       return console.log(data);
       // return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {

@@ -19,8 +19,9 @@ const List = () => {
   const [sortNo, setSortNo] = useState(0);
 
   useEffect(()=> {
-    dispatch(_getPosts(page));
-  }, [page]);
+    // dispatch(_getPosts(page));
+    dispatch(__sortAndCategory({page:page, sortNo:sortNo, cateNo:cateNo}));
+  }, [page, sortNo, cateNo]);
 
   const onClickSortAndCategory = (cateNo, sortNo) => {
     dispatch(__sortAndCategory({page:page, sortNo:sortNo, cateNo:cateNo}));
