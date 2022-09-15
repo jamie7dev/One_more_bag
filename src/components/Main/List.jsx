@@ -54,7 +54,7 @@ const List = () => {
         </StSidebar>
         <StContainer>
           <StFunction>
-          <StTotal>TOTAL 762</StTotal>
+          <StTotal>TOTAL</StTotal>
           <Stfilter>          
             <p className="total" onClick={()=>{setSortNo(0); onClickSortAndCategory(cateNo, sortNo)}}>신상품</p>
             <p className="total" onClick={()=>{setSortNo(4); onClickSortAndCategory(cateNo, sortNo)}}>상품명</p>
