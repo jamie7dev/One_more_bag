@@ -1,4 +1,4 @@
-# 프로젝트 이름 : One more bag [쇼핑몰 클론코딩]
+# 💝프로젝트명 : One more bag [쇼핑몰 클론코딩]
 
 #### 프로젝트 설명 : https://onemorebag.kr/product/list.html?cate_no=45 클론코딩
 ##### 프로젝트 기간: 22/9/9-15
