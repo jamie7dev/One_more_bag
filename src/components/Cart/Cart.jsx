@@ -152,7 +152,8 @@ const Cart = () => {
                   {/* 선택 */}
                   <td >
                     <button 
-                    style={{backgroundColor:"black", color:"white", border:"1.5px solid black"}}>
+                    style={{backgroundColor:"black", color:"white", border:"1.5px solid black"}}
+                    onClick={()=>alert('아직 구현되지 않은 기능입니다😭')}>
                       주문하기
                     </button>
                     <br />
