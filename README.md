@@ -1,10 +1,10 @@
 # 💝프로젝트명 : One more bag [쇼핑몰 클론코딩]
 
-#### 프로젝트 설명 : https://onemorebag.kr/product/list.html?cate_no=45 클론코딩
+#### 프로젝트 설명 : https://onemorebag.kr/product/list.html?cate_no=45 웹사이트 클론코딩
 ##### 프로젝트 기간: 22/9/9-15
 <img width="1757" alt="스크린샷 2022-09-15 오후 1 13 38" src="https://user-images.githubusercontent.com/104494969/190312656-94c2cfd5-2dcb-470f-8b94-2a12e3f3ed42.png">
 
-
+FE 서버 배포: http://hyerimawsbucket.s3-website.ap-northeast-2.amazonaws.com/
 ##### BE Github : [https://github.com/codingshoppingmall8/BE]
 
 #### 팀원
@@ -44,7 +44,7 @@
 -----------------
 ## 아쉬운 점 
 1. 상세페이지에서 뒤로가기를 하면 메인 첫 페이지로 돌아감
-2. 페이지네이션이 페이지마다 다른 개수로 적용되지 않음
+2. 카테고리별 페이지네이션이 적용 안 됨
 3. 관리자 페이지
     - 상품 등록
 
