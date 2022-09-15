@@ -110,13 +110,15 @@
 일반 로그인은 token을 쿠키에 저장하고, 카카오 로그인은 token을 로컬스토리지에 저장하는데,    
 if문으로 조건을 걸어서 카카오 로그인 시에 필요한 로컬스토리지에 있는 AccessToken이 null일 경우 쿠키에서 가져온 토큰들을 요청헤더에 실어주고,    
 로컬스토리지에 AccessToken이 있을 경우 헤더에 로컬스토리지에서 가져온 토큰들을 보내는 코드를 작성함
-    `if (AccessToken === null) {
+    ```
+    if (AccessToken === null) {
             config.headers.Authorization = token;
             config.headers.refreshToken = refreshToken;
         } else {
             config.headers.Authorization = AccessToken;
             config.headers.refreshToken = RefreshToken;
-        };`
+        };
+	```
       
 ## Back) 😡TroubleShooting  
 
